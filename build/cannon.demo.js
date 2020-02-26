@@ -1131,8 +1131,8 @@ CANNON.Demo.prototype.shape2mesh = function(body){
             }
         }
 
-        var o = body.shapeOffsets[l];
-        var q = body.shapeOrientations[l];
+        var o = shape.offset;
+        var q = shape.orientation;
         mesh.position.set(o.x, o.y, o.z);
         mesh.quaternion.set(q.x, q.y, q.z, q.w);
 
