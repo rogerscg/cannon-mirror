@@ -2,6 +2,10 @@
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 (function (f) {
@@ -119,9 +123,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         Equation: require('./equations/Equation'),
         EventTarget: require('./utils/EventTarget'),
         FrictionEquation: require('./equations/FrictionEquation'),
+        Group: require('./shapes/Group'),
         GSSolver: require('./solver/GSSolver'),
         GridBroadphase: require('./collision/GridBroadphase'),
-        Group: require('./shapes/Group'),
         Heightfield: require('./shapes/Heightfield'),
         HingeConstraint: require('./constraints/HingeConstraint'),
         LockConstraint: require('./constraints/LockConstraint'),
@@ -9483,34 +9487,104 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       var Vec3 = require('../math/Vec3');
       /**
-       * Represents a group of shapes that can be added to a body or another group.
-       * Enables a hierarchy of shapes and groups. Also enables easy construction and
-       * destruction of objects.
+       * Represents a group of shapes within the world. Enables a hierarchy of shapes
+       * and bodies. Also enables easy construction and destruction of objects.
+       * @class {Group}
        */
 
 
-      var Group = function Group() {
-        _classCallCheck(this, Group);
-
+      var Group =
+      /*#__PURE__*/
+      function () {
         /**
-         * @property shapes
-         * @type {Array}
+         * @param {Number} mass
          */
-        this.shapes = new Array();
+        function Group() {
+          var mass = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+          _classCallCheck(this, Group);
+
+          /**
+           * Identifier of the Group.
+           * @property {number} id
+           */
+          this.id = Group.idCounter++;
+          /**
+           * @property children
+           * @type {Set}
+           */
+
+          this.children = new Set();
+          /**
+           * @property {Body|Group} parent
+           */
+
+          this.parent = null;
+          /**
+           * @property {Vec3} position
+           */
+
+          this.position = new Vec3();
+          /**
+           * @property {Quaternion} quaternion
+           */
+
+          this.quaternion = new Quaternion();
+          /**
+           * @property mass
+           * @type {Number}
+           * @default 0
+           */
+          // TODO: Make Group mass affect body mass.
+
+          this.mass = mass;
+        }
         /**
-         * @property position
-         * @type {Vec3}
+         * Sets the parent of the group.
+         * @param {Body|Group} parent
          */
 
-        this.position = new Vec3();
-        /**
-         * @property quaternion
-         * @type {Quaternion}
-         */
 
-        this.position = new Vec3();
-      };
+        _createClass(Group, [{
+          key: "setParent",
+          value: function setParent(parent) {
+            if (this.parent) {
+              this.parent.remove(this);
+            }
 
+            this.parent = parent;
+          }
+          /**
+           * Adds a child shape or group to this group. Only groups and shapes can be
+           * children, NOT bodies.
+           * @param {Group|Shape} child
+           */
+
+        }, {
+          key: "add",
+          value: function add(child) {
+            child.setParent(this);
+            this.children.add(child);
+          }
+          /**
+           * Removes a child from the group.
+           * @param {Group|Shape} child
+           */
+
+        }, {
+          key: "remove",
+          value: function remove(child) {
+            if (this.children.has(child)) {
+              this.child.setParent(null);
+              this.children["delete"](child);
+            }
+          }
+        }]);
+
+        return Group;
+      }();
+
+      Group.idCounter = 0;
       module.exports = Group;
     }, {
       "../math/Vec3": 31

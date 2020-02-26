@@ -2,30 +2,84 @@ const Quaternion = require('../math/Vec3');
 const Vec3 = require('../math/Vec3');
 
 /**
- * Represents a group of shapes that can be added to a body or another group.
- * Enables a hierarchy of shapes and groups. Also enables easy construction and
- * destruction of objects.
+ * Represents a group of shapes within the world. Enables a hierarchy of shapes
+ * and bodies. Also enables easy construction and destruction of objects.
+ * @class {Group}
  */
 class Group {
-  constructor() {
+  /**
+   * @param {Number} mass
+   */
+  constructor(mass = 0) {
     /**
-     * @property shapes
-     * @type {Array}
+     * Identifier of the Group.
+     * @property {number} id
      */
-    this.shapes = new Array();
+    this.id = Group.idCounter++;
 
     /**
-     * @property position
-     * @type {Vec3}
+     * @property children
+     * @type {Set}
+     */
+    this.children = new Set();
+
+    /**
+     * @property {Body|Group} parent
+     */
+    this.parent = null;
+
+    /**
+     * @property {Vec3} position
      */
     this.position = new Vec3();
 
     /**
-     * @property quaternion
-     * @type {Quaternion}
+     * @property {Quaternion} quaternion
      */
-    this.position = new Vec3();
+    this.quaternion = new Quaternion();
+
+    /**
+     * @property mass
+     * @type {Number}
+     * @default 0
+     */
+    // TODO: Make Group mass affect body mass.
+    this.mass = mass;
+  }
+
+  /**
+   * Sets the parent of the group.
+   * @param {Body|Group} parent
+   */
+  setParent(parent) {
+    if (this.parent) {
+      this.parent.remove(this);
+    }
+    this.parent = parent;
+  }
+
+  /**
+   * Adds a child shape or group to this group. Only groups and shapes can be
+   * children, NOT bodies.
+   * @param {Group|Shape} child
+   */
+  add(child) {
+    child.setParent(this);
+    this.children.add(child);
+  }
+
+  /**
+   * Removes a child from the group.
+   * @param {Group|Shape} child
+   */
+  remove(child) {
+    if (this.children.has(child)) {
+      this.child.setParent(null);
+      this.children.delete(child);
+    }
   }
 }
+
+Group.idCounter = 0;
 
 module.exports = Group;
