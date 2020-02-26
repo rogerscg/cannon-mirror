@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>EventTarget - cannon</title>
+    <title>Group - cannon</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,12 +132,12 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>EventTarget Class</h1>
+<h1>Group Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_utils_EventTarget.js.html#l1"><code>src\utils\EventTarget.js:1</code></a>
+            Defined in: <a href="../files/src_shapes_Group.js.html#l4"><code>src\shapes\Group.js:4</code></a>
         </div>
 
 
@@ -145,16 +145,23 @@
 
 
 <div class="box intro">
-    <p>Base class for objects that dispatches events.</p>
+    <p>Represents a group of shapes within the world. Enables a hierarchy of shapes
+and bodies. Also enables easy construction and destruction of objects.</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_EventTarget" class="method item">
-    <h3 class="name"><code>EventTarget</code></h3>
+<div id="method_Group" class="method item">
+    <h3 class="name"><code>Group</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>mass</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
 
 
@@ -166,7 +173,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_utils_EventTarget.js.html#l1"><code>src\utils\EventTarget.js:1</code></a>
+        <a href="../files/src_shapes_Group.js.html#l4"><code>src\shapes\Group.js:4</code></a>
         </p>
 
 
@@ -177,6 +184,22 @@
         
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">mass</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
 
 
@@ -188,6 +211,7 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
     </ul>
 
     <div>
@@ -199,28 +223,50 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_addEventListener">addEventListener</a>
+                                <a href="#method_add">add</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_dispatchEvent">dispatchEvent</a>
+                                <a href="#method_remove">remove</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_hasAnyEventListener">hasAnyEventListener</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_hasEventListener">hasEventListener</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_removeEventListener">removeEventListener</a>
+                                <a href="#method_setParent">setParent</a>
 
                             </li>
                     </ul>
                 </div>
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property">
+                                <a href="#property_children">children</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_id">id</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_mass">mass</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_parent">parent</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_position">position</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_quaternion">quaternion</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
         </div>
@@ -228,23 +274,17 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_addEventListener" class="method item">
-    <h3 class="name"><code>addEventListener</code></h3>
+<div id="method_add" class="method item">
+    <h3 class="name"><code>add</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>type</code>
-                </li>
-                <li class="arg">
-                        <code>listener</code>
+                        <code>child</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/EventTarget.html" class="crosslink">EventTarget</a></span>
-        </span>
 
 
 
@@ -255,7 +295,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_utils_EventTarget.js.html#l15"><code>src\utils\EventTarget.js:15</code></a>
+        <a href="../files/src_shapes_Group.js.html#l61"><code>src\shapes\Group.js:61</code></a>
         </p>
 
 
@@ -263,7 +303,8 @@
     </div>
 
     <div class="description">
-        <p>Add an event listener</p>
+        <p>Adds a child shape or group to this group. Only groups and shapes can be
+children, NOT bodies.</p>
 
     </div>
 
@@ -272,54 +313,32 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">type</code>
-                        <span class="type">String</span>
+                        <code class="param-name">child</code>
+                        <span class="type"><a href="../classes/Group.html" class="crosslink">Group</a> | <a href="../classes/Shape.html" class="crosslink">Shape</a></span>
 
 
                     <div class="param-description">
-                        
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">listener</code>
-                        <span class="type">Function</span>
-
-
-                    <div class="param-description">
-                        
+                         
                     </div>
 
                 </li>
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="../classes/EventTarget.html" class="crosslink">EventTarget</a></span>:
-                    <p>The self object, for chainability.</p>
-
-            </div>
-        </div>
 
 
 </div>
-<div id="method_dispatchEvent" class="method item">
-    <h3 class="name"><code>dispatchEvent</code></h3>
+<div id="method_remove" class="method item">
+    <h3 class="name"><code>remove</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>event</code>
+                        <code>child</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/EventTarget.html" class="crosslink">EventTarget</a></span>
-        </span>
 
 
 
@@ -330,7 +349,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_utils_EventTarget.js.html#l80"><code>src\utils\EventTarget.js:80</code></a>
+        <a href="../files/src_shapes_Group.js.html#l72"><code>src\shapes\Group.js:72</code></a>
         </p>
 
 
@@ -338,7 +357,7 @@
     </div>
 
     <div class="description">
-        <p>Emit an event.</p>
+        <p>Removes a child from the group.</p>
 
     </div>
 
@@ -347,55 +366,32 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">event</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">child</code>
+                        <span class="type"><a href="../classes/Group.html" class="crosslink">Group</a> | <a href="../classes/Shape.html" class="crosslink">Shape</a></span>
 
 
                     <div class="param-description">
-                        
+                         
                     </div>
 
-                        <ul class="params-list">
-                            <li class="param">
-                                    <code class="param-name">type</code>
-                                    <span class="type">String</span>
-
-                                <div class="param-description">
-                                    
-                                </div>
-
-                            </li>
-                        </ul>
                 </li>
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="../classes/EventTarget.html" class="crosslink">EventTarget</a></span>:
-                    <p>The self object, for chainability.</p>
-
-            </div>
-        </div>
 
 
 </div>
-<div id="method_hasAnyEventListener" class="method item">
-    <h3 class="name"><code>hasAnyEventListener</code></h3>
+<div id="method_setParent" class="method item">
+    <h3 class="name"><code>setParent</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>type</code>
+                        <code>parent</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
 
 
 
@@ -406,7 +402,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_utils_EventTarget.js.html#l50"><code>src\utils\EventTarget.js:50</code></a>
+        <a href="../files/src_shapes_Group.js.html#l49"><code>src\shapes\Group.js:49</code></a>
         </p>
 
 
@@ -414,7 +410,7 @@
     </div>
 
     <div class="description">
-        <p>Check if any event listener of the given type is added</p>
+        <p>Sets the parent of the group.</p>
 
     </div>
 
@@ -423,47 +419,29 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">type</code>
-                        <span class="type">String</span>
+                        <code class="param-name">parent</code>
+                        <span class="type"><a href="../classes/Body.html" class="crosslink">Body</a> | <a href="../classes/Group.html" class="crosslink">Group</a></span>
 
 
                     <div class="param-description">
-                        
+                         
                     </div>
 
                 </li>
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Boolean</span>:
-            </div>
-        </div>
 
 
 </div>
-<div id="method_hasEventListener" class="method item">
-    <h3 class="name"><code>hasEventListener</code></h3>
+            </div>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>type</code>
-                </li>
-                <li class="arg">
-                        <code>listener</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
 
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
-
-
+<div id="property_children" class="property item">
+    <h3 class="name"><code>children</code></h3>
+    <span class="type">Set</span>
 
 
 
@@ -472,74 +450,22 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_utils_EventTarget.js.html#l34"><code>src\utils\EventTarget.js:34</code></a>
+        <a href="../files/src_shapes_Group.js.html#l19"><code>src\shapes\Group.js:19</code></a>
         </p>
-
 
 
     </div>
 
     <div class="description">
-        <p>Check if an event listener is added</p>
-
+        
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">type</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">listener</code>
-                        <span class="type">Function</span>
-
-
-                    <div class="param-description">
-                        
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Boolean</span>:
-            </div>
-        </div>
 
 
 </div>
-<div id="method_removeEventListener" class="method item">
-    <h3 class="name"><code>removeEventListener</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>type</code>
-                </li>
-                <li class="arg">
-                        <code>listener</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/EventTarget.html" class="crosslink">EventTarget</a></span>
-        </span>
-
-
+<div id="property_id" class="property item">
+    <h3 class="name"><code>id</code></h3>
+    <span class="type">Number</span>
 
 
 
@@ -548,59 +474,118 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_utils_EventTarget.js.html#l62"><code>src\utils\EventTarget.js:62</code></a>
+        <a href="../files/src_shapes_Group.js.html#l13"><code>src\shapes\Group.js:13</code></a>
         </p>
-
 
 
     </div>
 
     <div class="description">
-        <p>Remove an event listener</p>
+        <p>Identifier of the Group.</p>
 
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">type</code>
-                        <span class="type">String</span>
 
 
-                    <div class="param-description">
-                        
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">listener</code>
-                        <span class="type">Function</span>
+</div>
+<div id="property_mass" class="property item">
+    <h3 class="name"><code>mass</code></h3>
+    <span class="type">Number</span>
 
 
-                    <div class="param-description">
-                        
-                    </div>
 
-                </li>
-            </ul>
-        </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
 
-            <div class="returns-description">
-                        <span class="type"><a href="../classes/EventTarget.html" class="crosslink">EventTarget</a></span>:
-                    <p>The self object, for chainability.</p>
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l40"><code>src\shapes\Group.js:40</code></a>
+        </p>
 
-            </div>
-        </div>
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <p><strong>Default:</strong> 0</p>
+
+
+</div>
+<div id="property_parent" class="property item">
+    <h3 class="name"><code>parent</code></h3>
+    <span class="type"><a href="../classes/Body.html" class="crosslink">Body</a> | <a href="../classes/Group.html" class="crosslink">Group</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l25"><code>src\shapes\Group.js:25</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+</div>
+<div id="property_position" class="property item">
+    <h3 class="name"><code>position</code></h3>
+    <span class="type"><a href="../classes/Vec3.html" class="crosslink">Vec3</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l30"><code>src\shapes\Group.js:30</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+</div>
+<div id="property_quaternion" class="property item">
+    <h3 class="name"><code>quaternion</code></h3>
+    <span class="type"><a href="../classes/Quaternion.html" class="crosslink">Quaternion</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l35"><code>src\shapes\Group.js:35</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
 
 
 </div>
             </div>
-
 
 
     </div>

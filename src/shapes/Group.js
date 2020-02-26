@@ -4,12 +4,11 @@ const Vec3 = require('../math/Vec3');
 /**
  * Represents a group of shapes within the world. Enables a hierarchy of shapes
  * and bodies. Also enables easy construction and destruction of objects.
- * @class {Group}
+ * @constructor
+ * @class Group
+ * @param {Number} mass
  */
 class Group {
-  /**
-   * @param {Number} mass
-   */
   constructor(mass = 0) {
     /**
      * Identifier of the Group.
@@ -50,6 +49,7 @@ class Group {
   /**
    * Sets the parent of the group.
    * @param {Body|Group} parent
+   * @method setParent
    */
   setParent(parent) {
     if (this.parent) {
@@ -62,6 +62,7 @@ class Group {
    * Adds a child shape or group to this group. Only groups and shapes can be
    * children, NOT bodies.
    * @param {Group|Shape} child
+   * @method add
    */
   add(child) {
     child.setParent(this);
@@ -71,6 +72,7 @@ class Group {
   /**
    * Removes a child from the group.
    * @param {Group|Shape} child
+   * @method remove
    */
   remove(child) {
     if (this.children.has(child)) {

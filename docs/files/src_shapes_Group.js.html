@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\material\ContactMaterial.js - cannon</title>
+    <title>src\shapes\Group.js - cannon</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,89 +132,97 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src\material\ContactMaterial.js</h1>
+<h1 class="file-heading">File: src\shapes\Group.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-var Utils = require(&#x27;../utils/Utils&#x27;);
-
-module.exports = ContactMaterial;
+const Quaternion = require(&#x27;../math/Vec3&#x27;);
+const Vec3 = require(&#x27;../math/Vec3&#x27;);
 
 /**
- * Defines what happens when two materials meet.
- * @class ContactMaterial
+ * Represents a group of shapes within the world. Enables a hierarchy of shapes
+ * and bodies. Also enables easy construction and destruction of objects.
  * @constructor
- * @param {Material} m1
- * @param {Material} m2
- * @param {object} [options]
- * @param {Number} [options.friction=0.3]
- * @param {Number} [options.restitution=0.3]
- * @param {number} [options.contactEquationStiffness=1e7]
- * @param {number} [options.contactEquationRelaxation=3]
- * @param {number} [options.frictionEquationStiffness=1e7]
- * @param {Number} [options.frictionEquationRelaxation=3]
+ * @class Group
+ * @param {Number} mass
  */
-function ContactMaterial(m1, m2, options){
-    options = Utils.defaults(options, {
-        friction: 0.3,
-        restitution: 0.3,
-        contactEquationStiffness: 1e7,
-        contactEquationRelaxation: 3,
-        frictionEquationStiffness: 1e7,
-        frictionEquationRelaxation: 3
-    });
+class Group {
+  constructor(mass = 0) {
+    /**
+     * Identifier of the Group.
+     * @property {number} id
+     */
+    this.id = Group.idCounter++;
 
     /**
-     * Identifier of this material
-     * @property {Number} id
+     * @property children
+     * @type {Set}
      */
-    this.id = ContactMaterial.idCounter++;
+    this.children = new Set();
 
     /**
-     * Participating materials
-     * @property {Array} materials
-     * @todo  Should be .materialA and .materialB instead
+     * @property {Body|Group} parent
      */
-    this.materials = [m1, m2];
+    this.parent = null;
 
     /**
-     * Friction coefficient
-     * @property {Number} friction
+     * @property {Vec3} position
      */
-    this.friction = options.friction;
+    this.position = new Vec3();
 
     /**
-     * Restitution coefficient
-     * @property {Number} restitution
+     * @property {Quaternion} quaternion
      */
-    this.restitution = options.restitution;
+    this.quaternion = new Quaternion();
 
     /**
-     * Stiffness of the produced contact equations
-     * @property {Number} contactEquationStiffness
+     * @property mass
+     * @type {Number}
+     * @default 0
      */
-    this.contactEquationStiffness = options.contactEquationStiffness;
+    // TODO: Make Group mass affect body mass.
+    this.mass = mass;
+  }
 
-    /**
-     * Relaxation time of the produced contact equations
-     * @property {Number} contactEquationRelaxation
-     */
-    this.contactEquationRelaxation = options.contactEquationRelaxation;
+  /**
+   * Sets the parent of the group.
+   * @param {Body|Group} parent
+   * @method setParent
+   */
+  setParent(parent) {
+    if (this.parent) {
+      this.parent.remove(this);
+    }
+    this.parent = parent;
+  }
 
-    /**
-     * Stiffness of the produced friction equations
-     * @property {Number} frictionEquationStiffness
-     */
-    this.frictionEquationStiffness = options.frictionEquationStiffness;
+  /**
+   * Adds a child shape or group to this group. Only groups and shapes can be
+   * children, NOT bodies.
+   * @param {Group|Shape} child
+   * @method add
+   */
+  add(child) {
+    child.setParent(this);
+    this.children.add(child);
+  }
 
-    /**
-     * Relaxation time of the produced friction equations
-     * @property {Number} frictionEquationRelaxation
-     */
-    this.frictionEquationRelaxation = options.frictionEquationRelaxation;
+  /**
+   * Removes a child from the group.
+   * @param {Group|Shape} child
+   * @method remove
+   */
+  remove(child) {
+    if (this.children.has(child)) {
+      this.child.setParent(null);
+      this.children.delete(child);
+    }
+  }
 }
 
-ContactMaterial.idCounter = 0;
+Group.idCounter = 0;
+
+module.exports = Group;
 
     </pre>
 </div>

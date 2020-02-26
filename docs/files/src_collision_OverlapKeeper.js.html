@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\material\ContactMaterial.js - cannon</title>
+    <title>src\collision\OverlapKeeper.js - cannon</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,90 +132,105 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src\material\ContactMaterial.js</h1>
+<h1 class="file-heading">File: src\collision\OverlapKeeper.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-var Utils = require(&#x27;../utils/Utils&#x27;);
-
-module.exports = ContactMaterial;
+module.exports = OverlapKeeper;
 
 /**
- * Defines what happens when two materials meet.
- * @class ContactMaterial
+ * @class OverlapKeeper
  * @constructor
- * @param {Material} m1
- * @param {Material} m2
- * @param {object} [options]
- * @param {Number} [options.friction=0.3]
- * @param {Number} [options.restitution=0.3]
- * @param {number} [options.contactEquationStiffness=1e7]
- * @param {number} [options.contactEquationRelaxation=3]
- * @param {number} [options.frictionEquationStiffness=1e7]
- * @param {Number} [options.frictionEquationRelaxation=3]
  */
-function ContactMaterial(m1, m2, options){
-    options = Utils.defaults(options, {
-        friction: 0.3,
-        restitution: 0.3,
-        contactEquationStiffness: 1e7,
-        contactEquationRelaxation: 3,
-        frictionEquationStiffness: 1e7,
-        frictionEquationRelaxation: 3
-    });
-
-    /**
-     * Identifier of this material
-     * @property {Number} id
-     */
-    this.id = ContactMaterial.idCounter++;
-
-    /**
-     * Participating materials
-     * @property {Array} materials
-     * @todo  Should be .materialA and .materialB instead
-     */
-    this.materials = [m1, m2];
-
-    /**
-     * Friction coefficient
-     * @property {Number} friction
-     */
-    this.friction = options.friction;
-
-    /**
-     * Restitution coefficient
-     * @property {Number} restitution
-     */
-    this.restitution = options.restitution;
-
-    /**
-     * Stiffness of the produced contact equations
-     * @property {Number} contactEquationStiffness
-     */
-    this.contactEquationStiffness = options.contactEquationStiffness;
-
-    /**
-     * Relaxation time of the produced contact equations
-     * @property {Number} contactEquationRelaxation
-     */
-    this.contactEquationRelaxation = options.contactEquationRelaxation;
-
-    /**
-     * Stiffness of the produced friction equations
-     * @property {Number} frictionEquationStiffness
-     */
-    this.frictionEquationStiffness = options.frictionEquationStiffness;
-
-    /**
-     * Relaxation time of the produced friction equations
-     * @property {Number} frictionEquationRelaxation
-     */
-    this.frictionEquationRelaxation = options.frictionEquationRelaxation;
+function OverlapKeeper() {
+    this.current = [];
+    this.previous = [];
 }
 
-ContactMaterial.idCounter = 0;
+OverlapKeeper.prototype.getKey = function(i, j) {
+    if (j &lt; i) {
+        var temp = j;
+        j = i;
+        i = temp;
+    }
+    return (i &lt;&lt; 16) | j;
+};
 
+
+/**
+ * @method set
+ * @param {Number} i
+ * @param {Number} j
+ */
+OverlapKeeper.prototype.set = function(i, j) {
+    // Insertion sort. This way the diff will have linear complexity.
+    var key = this.getKey(i, j);
+    var current = this.current;
+    var index = 0;
+    while(key &gt; current[index]){
+        index++;
+    }
+    if(key === current[index]){
+        return; // Pair was already added
+    }
+    for(var j=current.length-1; j&gt;=index; j--){
+        current[j + 1] = current[j];
+    }
+    current[index] = key;
+};
+
+/**
+ * @method tick
+ */
+OverlapKeeper.prototype.tick = function() {
+    var tmp = this.current;
+    this.current = this.previous;
+    this.previous = tmp;
+    this.current.length = 0;
+};
+
+function unpackAndPush(array, key){
+    array.push((key &amp; 0xFFFF0000) &gt;&gt; 16, key &amp; 0x0000FFFF);
+}
+
+/**
+ * @method getDiff
+ * @param  {array} additions
+ * @param  {array} removals
+ */
+OverlapKeeper.prototype.getDiff = function(additions, removals) {
+    var a = this.current;
+    var b = this.previous;
+    var al = a.length;
+    var bl = b.length;
+
+    var j=0;
+    for (var i = 0; i &lt; al; i++) {
+        var found = false;
+        var keyA = a[i];
+        while(keyA &gt; b[j]){
+            j++;
+        }
+        found = keyA === b[j];
+
+        if(!found){
+            unpackAndPush(additions, keyA);
+        }
+    }
+    j = 0;
+    for (var i = 0; i &lt; bl; i++) {
+        var found = false;
+        var keyB = b[i];
+        while(keyB &gt; a[j]){
+            j++;
+        }
+        found = a[j] === keyB;
+
+        if(!found){
+            unpackAndPush(removals, keyB);
+        }
+    }
+};
     </pre>
 </div>
                     </div>
