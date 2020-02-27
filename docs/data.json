@@ -6921,14 +6921,14 @@
         {
             "file": "src\\objects\\Body.js",
             "line": 623,
-            "description": "Update the bounding radius of the body. Should be done if any of the shapes are changed.",
+            "description": "Update the bounding radius of the body. Should be done if any of the children\nare changed.",
             "itemtype": "method",
             "name": "updateBoundingRadius",
             "class": "Body"
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 647,
+            "line": 648,
             "description": "Updates the .aabb",
             "itemtype": "method",
             "name": "computeAABB",
@@ -6939,7 +6939,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 693,
+            "line": 694,
             "description": "Update .inertiaWorld and .invInertiaWorld",
             "itemtype": "method",
             "name": "updateInertiaWorld",
@@ -6947,7 +6947,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 716,
+            "line": 717,
             "description": "Apply force to a world point. This could for example be a point on the Body surface. Applying force this way will add to Body.force and Body.torque.",
             "itemtype": "method",
             "name": "applyForce",
@@ -6967,7 +6967,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 741,
+            "line": 742,
             "description": "Apply force to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalForce",
@@ -6987,7 +6987,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 764,
+            "line": 765,
             "description": "Apply impulse to a world point. This could for example be a point on the Body surface. An impulse is a force added to a body during a short period of time (impulse = force * time). Impulses will be added to Body.velocity and Body.angularVelocity.",
             "itemtype": "method",
             "name": "applyImpulse",
@@ -7007,7 +7007,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 804,
+            "line": 805,
             "description": "Apply locally-defined impulse to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalImpulse",
@@ -7027,7 +7027,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 829,
+            "line": 830,
             "description": "Should be called whenever you change the body shape or mass.",
             "itemtype": "method",
             "name": "updateMassProperties",
@@ -7035,7 +7035,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 857,
+            "line": 858,
             "description": "Get world velocity of a point in the body.",
             "itemtype": "method",
             "name": "getVelocityAtWorldPoint",
@@ -7059,7 +7059,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 877,
+            "line": 878,
             "description": "Move the body forward in time.",
             "params": [
                 {
@@ -8669,7 +8669,25 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 49,
+            "line": 48,
+            "description": "The local bounding sphere radius of this group.",
+            "itemtype": "property",
+            "name": "boundingSphereRadius",
+            "type": "Number",
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 55,
+            "description": "Shim to better match Shape.",
+            "todo": [
+                ": Remove this."
+            ],
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 63,
             "description": "Sets the parent of the group.",
             "params": [
                 {
@@ -8684,7 +8702,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 61,
+            "line": 75,
             "description": "Adds a child shape or group to this group. Only groups and shapes can be\nchildren, NOT bodies.",
             "params": [
                 {
@@ -8699,7 +8717,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 72,
+            "line": 86,
             "description": "Removes a child from the group.",
             "params": [
                 {
@@ -8710,6 +8728,14 @@
             ],
             "itemtype": "method",
             "name": "remove",
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 98,
+            "description": "Computes the bounding sphere radius. The result is stored in the property\n.boundingSphereRadius.",
+            "itemtype": "method",
+            "name": "updateBoundingSphereRadius",
             "class": "Group"
         },
         {
@@ -11656,7 +11682,11 @@
         },
         {
             "message": "Missing item type\nMove the body forward in time.",
-            "line": " src\\objects\\Body.js:877"
+            "line": " src\\objects\\Body.js:878"
+        },
+        {
+            "message": "Missing item type\nShim to better match Shape.",
+            "line": " src\\shapes\\Group.js:55"
         },
         {
             "message": "Missing item type\nGet an AABB of a square in the heightfield",

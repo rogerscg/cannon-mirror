@@ -759,19 +759,20 @@ Body.prototype.addShape = function(shape, _offset, _orientation) {
 };
 
 /**
- * Update the bounding radius of the body. Should be done if any of the shapes are changed.
+ * Update the bounding radius of the body. Should be done if any of the children
+ * are changed.
  * @method updateBoundingRadius
  */
 Body.prototype.updateBoundingRadius = function() {
-  var shapes = this.children,
-    N = shapes.length,
-    radius = 0;
+  const children = this.children;
+  const N = children.length;
+  let radius = 0;
 
-  for (var i = 0; i !== N; i++) {
-    var shape = shapes[i];
-    shape.updateBoundingSphereRadius();
-    var offset = shape.offset.norm(),
-      r = shape.boundingSphereRadius;
+  for (let i = 0; i !== N; i++) {
+    const child = children[i];
+    child.updateBoundingSphereRadius();
+    const offset = child.offset.norm();
+    const r = child.boundingSphereRadius;
     if (offset + r &gt; radius) {
       radius = offset + r;
     }

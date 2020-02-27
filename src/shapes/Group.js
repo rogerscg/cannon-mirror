@@ -44,6 +44,20 @@ class Group {
      */
     // TODO: Make Group mass affect body mass.
     this.mass = mass;
+
+    /**
+     * The local bounding sphere radius of this group.
+     * @property {Number} boundingSphereRadius
+     */
+    this.boundingSphereRadius = 0;
+  }
+
+  /**
+   * Shim to better match Shape.
+   * @todo: Remove this.
+   */
+  get offset() {
+    return this.position;
   }
 
   /**
@@ -79,6 +93,30 @@ class Group {
       this.child.setParent(null);
       this.children.delete(child);
     }
+  }
+
+  /**
+   * Computes the bounding sphere radius. The result is stored in the property
+   * .boundingSphereRadius.
+   * @method updateBoundingSphereRadius
+   */
+  updateBoundingSphereRadius() {
+    // @todo: This is the same logic as Body. Try and remove duplicate code.
+    const children = [...this.children];
+    const N = children.length;
+    let radius = 0;
+
+    for (let i = 0; i !== N; i++) {
+      const child = children[i];
+      child.updateBoundingSphereRadius();
+      const offset = child.offset.norm();
+      const r = child.boundingSphereRadius;
+      if (offset + r > radius) {
+        radius = offset + r;
+      }
+    }
+
+    this.boundingRadius = radius;
   }
 }
 

@@ -1,5 +1,13 @@
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -5972,7 +5980,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         this.initAngularVelocity = new Vec3();
         /**
          * @property children
-         * @type {array}
+         * @type {Array<Shape|Group>}
          */
 
         this.children = [];
@@ -6310,21 +6318,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return this;
       };
       /**
-       * Update the bounding radius of the body. Should be done if any of the shapes are changed.
+       * Update the bounding radius of the body. Should be done if any of the children
+       * are changed.
        * @method updateBoundingRadius
        */
 
 
       Body.prototype.updateBoundingRadius = function () {
-        var shapes = this.children,
-            N = shapes.length,
-            radius = 0;
+        var children = this.children;
+        var N = children.length;
+        var radius = 0;
 
         for (var i = 0; i !== N; i++) {
-          var shape = shapes[i];
-          shape.updateBoundingSphereRadius();
-          var offset = shape.offset.norm(),
-              r = shape.boundingSphereRadius;
+          var child = children[i];
+          child.updateBoundingSphereRadius();
+          var offset = child.offset.norm();
+          var r = child.boundingSphereRadius;
 
           if (offset + r > radius) {
             radius = offset + r;
@@ -9537,16 +9546,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           // TODO: Make Group mass affect body mass.
 
           this.mass = mass;
+          /**
+           * The local bounding sphere radius of this group.
+           * @property {Number} boundingSphereRadius
+           */
+
+          this.boundingSphereRadius = 0;
         }
         /**
-         * Sets the parent of the group.
-         * @param {Body|Group} parent
-         * @method setParent
+         * Shim to better match Shape.
+         * @todo: Remove this.
          */
 
 
         _createClass(Group, [{
           key: "setParent",
+
+          /**
+           * Sets the parent of the group.
+           * @param {Body|Group} parent
+           * @method setParent
+           */
           value: function setParent(parent) {
             if (this.parent) {
               this.parent.remove(this);
@@ -9580,6 +9600,39 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               this.child.setParent(null);
               this.children["delete"](child);
             }
+          }
+          /**
+           * Computes the bounding sphere radius. The result is stored in the property
+           * .boundingSphereRadius.
+           * @method updateBoundingSphereRadius
+           */
+
+        }, {
+          key: "updateBoundingSphereRadius",
+          value: function updateBoundingSphereRadius() {
+            // @todo: This is the same logic as Body. Try and remove duplicate code.
+            var children = _toConsumableArray(this.children);
+
+            var N = children.length;
+            var radius = 0;
+
+            for (var i = 0; i !== N; i++) {
+              var child = children[i];
+              child.updateBoundingSphereRadius();
+              var offset = child.offset.norm();
+              var r = child.boundingSphereRadius;
+
+              if (offset + r > radius) {
+                radius = offset + r;
+              }
+            }
+
+            this.boundingRadius = radius;
+          }
+        }, {
+          key: "offset",
+          get: function get() {
+            return this.position;
           }
         }]);
 
