@@ -95,6 +95,17 @@ Shape.prototype.updateBoundingSphereRadius = function() {
 };
 
 /**
+ * Computes the bounding box for the shape and stores the result in min and max.
+ * @param {Vec3} pos
+ * @param {Quaternion} quat
+ * @param {Vec3} min
+ * @param {Vec3} max
+ */
+Shape.prototype.calculateWorldAABB = function(pos, quat, min, max) {
+  throw 'calculateWorldAABB() not implemented for shape type ' + this.type;
+};
+
+/**
  * Get the volume of this shape
  * @method volume
  * @return {Number}

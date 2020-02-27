@@ -1,4 +1,4 @@
-// Thu, 27 Feb 2020 00:52:34 GMT
+// Thu, 27 Feb 2020 01:23:10 GMT
 
 /*
  * Copyright (c) 2015 cannon.js Authors
@@ -6140,26 +6140,27 @@ var computeAABB_shapeAABB = new AABB();
  * @todo rename to updateAABB()
  */
 Body.prototype.computeAABB = function() {
-  var shapes = this.children,
-    N = shapes.length,
-    offset = tmpVec,
-    orientation = tmpQuat,
-    bodyQuat = this.quaternion,
-    aabb = this.aabb,
-    shapeAABB = computeAABB_shapeAABB;
+  const children = this.children;
+  const N = children.length;
 
-  for (var i = 0; i !== N; i++) {
-    var shape = shapes[i];
+  const offset = tmpVec;
+  const orientation = tmpQuat;
+  const bodyQuat = this.quaternion;
+  const aabb = this.aabb;
+  const shapeAABB = computeAABB_shapeAABB;
+
+  for (let i = 0; i !== N; i++) {
+    const child = children[i];
 
     // Get shape world position
-    bodyQuat.vmult(shape.offset, offset);
+    bodyQuat.vmult(child.offset, offset);
     offset.vadd(this.position, offset);
 
     // Get shape world quaternion
-    shape.orientation.mult(bodyQuat, orientation);
+    child.orientation.mult(bodyQuat, orientation);
 
-    // Get shape AABB
-    shape.calculateWorldAABB(
+    // Get child AABB
+    child.calculateWorldAABB(
       offset,
       orientation,
       shapeAABB.lowerBound,
@@ -9294,8 +9295,13 @@ function Cylinder( radiusTop, radiusBottom, height , numSegments ) {
 Cylinder.prototype = new ConvexPolyhedron();
 
 },{"../math/Quaternion":29,"../math/Vec3":31,"./ConvexPolyhedron":39,"./Shape":45}],41:[function(require,module,exports){
+const AABB = require('../collision/AABB');
 const Quaternion = require('../math/Vec3');
 const Vec3 = require('../math/Vec3');
+
+const tmpAABB = new AABB();
+const tmpQuat = new Quaternion();
+const tmpVec = new Vec3();
 
 /**
  * Represents a group of shapes within the world. Enables a hierarchy of shapes
@@ -9346,6 +9352,13 @@ class Group {
      * @property {Number} boundingSphereRadius
      */
     this.boundingSphereRadius = 0;
+
+    /**
+     * World space bounding box of the group and its children.
+     * @property aabb
+     * @type {AABB}
+     */
+    this.aabb = new AABB();
   }
 
   /**
@@ -9354,6 +9367,14 @@ class Group {
    */
   get offset() {
     return this.position;
+  }
+
+  /**
+   * Shim to better match Shape.
+   * @todo: Remove this.
+   */
+  get orientation() {
+    return this.quaternion;
   }
 
   /**
@@ -9414,13 +9435,57 @@ class Group {
 
     this.boundingRadius = radius;
   }
+
+  /**
+   * Computes the bounding box for the shape and stores the result in min and max.
+   * @todo Calculate world position and world rotation within group/shape.
+   * @param {Vec3} worldPos
+   * @param {Quaternion} worldQuat
+   * @param {Vec3} min
+   * @param {Vec3} max
+   */
+  calculateWorldAABB(worldPos, worldQuat, min, max) {
+    const children = [...this.children];
+    const N = children.length;
+    const offset = tmpVec;
+    const orientation = tmpQuat;
+    const aabb = this.aabb;
+    const shapeAABB = tmpAABB;
+
+    for (let i = 0; i !== N; i++) {
+      const child = children[i];
+
+      // Get child world position
+      worldQuat.vmult(child.offset, offset);
+      offset.vadd(worldPos, offset);
+
+      // Get child world quaternion
+      child.orientation.mult(worldQuat, orientation);
+
+      // Get child AABB
+      child.calculateWorldAABB(
+        offset,
+        orientation,
+        shapeAABB.lowerBound,
+        shapeAABB.upperBound
+      );
+
+      if (i === 0) {
+        aabb.copy(shapeAABB);
+      } else {
+        aabb.extend(shapeAABB);
+      }
+    }
+    min.copy(aabb.lowerBound);
+    max.copy(aabb.upperBound);
+  }
 }
 
 Group.idCounter = 0;
 
 module.exports = Group;
 
-},{"../math/Vec3":31}],42:[function(require,module,exports){
+},{"../collision/AABB":3,"../math/Vec3":31}],42:[function(require,module,exports){
 var Shape = require('./Shape');
 var ConvexPolyhedron = require('./ConvexPolyhedron');
 var Vec3 = require('../math/Vec3');
@@ -10312,6 +10377,17 @@ Shape.prototype.constructor = Shape;
 Shape.prototype.updateBoundingSphereRadius = function() {
   throw 'computeBoundingSphereRadius() not implemented for shape type ' +
     this.type;
+};
+
+/**
+ * Computes the bounding box for the shape and stores the result in min and max.
+ * @param {Vec3} pos
+ * @param {Quaternion} quat
+ * @param {Vec3} min
+ * @param {Vec3} max
+ */
+Shape.prototype.calculateWorldAABB = function(pos, quat, min, max) {
+  throw 'calculateWorldAABB() not implemented for shape type ' + this.type;
 };
 
 /**

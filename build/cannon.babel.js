@@ -6351,23 +6351,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
       Body.prototype.computeAABB = function () {
-        var shapes = this.children,
-            N = shapes.length,
-            offset = tmpVec,
-            orientation = tmpQuat,
-            bodyQuat = this.quaternion,
-            aabb = this.aabb,
-            shapeAABB = computeAABB_shapeAABB;
+        var children = this.children;
+        var N = children.length;
+        var offset = tmpVec;
+        var orientation = tmpQuat;
+        var bodyQuat = this.quaternion;
+        var aabb = this.aabb;
+        var shapeAABB = computeAABB_shapeAABB;
 
         for (var i = 0; i !== N; i++) {
-          var shape = shapes[i]; // Get shape world position
+          var child = children[i]; // Get shape world position
 
-          bodyQuat.vmult(shape.offset, offset);
+          bodyQuat.vmult(child.offset, offset);
           offset.vadd(this.position, offset); // Get shape world quaternion
 
-          shape.orientation.mult(bodyQuat, orientation); // Get shape AABB
+          child.orientation.mult(bodyQuat, orientation); // Get child AABB
 
-          shape.calculateWorldAABB(offset, orientation, shapeAABB.lowerBound, shapeAABB.upperBound);
+          child.calculateWorldAABB(offset, orientation, shapeAABB.lowerBound, shapeAABB.upperBound);
 
           if (i === 0) {
             aabb.copy(shapeAABB);
@@ -9492,9 +9492,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       "./Shape": 45
     }],
     41: [function (require, module, exports) {
+      var AABB = require('../collision/AABB');
+
       var Quaternion = require('../math/Vec3');
 
       var Vec3 = require('../math/Vec3');
+
+      var tmpAABB = new AABB();
+      var tmpQuat = new Quaternion();
+      var tmpVec = new Vec3();
       /**
        * Represents a group of shapes within the world. Enables a hierarchy of shapes
        * and bodies. Also enables easy construction and destruction of objects.
@@ -9502,7 +9508,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        * @class Group
        * @param {Number} mass
        */
-
 
       var Group =
       /*#__PURE__*/
@@ -9552,6 +9557,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
            */
 
           this.boundingSphereRadius = 0;
+          /**
+           * World space bounding box of the group and its children.
+           * @property aabb
+           * @type {AABB}
+           */
+
+          this.aabb = new AABB();
         }
         /**
          * Shim to better match Shape.
@@ -9629,10 +9641,60 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
             this.boundingRadius = radius;
           }
+          /**
+           * Computes the bounding box for the shape and stores the result in min and max.
+           * @todo Calculate world position and world rotation within group/shape.
+           * @param {Vec3} worldPos
+           * @param {Quaternion} worldQuat
+           * @param {Vec3} min
+           * @param {Vec3} max
+           */
+
+        }, {
+          key: "calculateWorldAABB",
+          value: function calculateWorldAABB(worldPos, worldQuat, min, max) {
+            var children = _toConsumableArray(this.children);
+
+            var N = children.length;
+            var offset = tmpVec;
+            var orientation = tmpQuat;
+            var aabb = this.aabb;
+            var shapeAABB = tmpAABB;
+
+            for (var i = 0; i !== N; i++) {
+              var child = children[i]; // Get child world position
+
+              worldQuat.vmult(child.offset, offset);
+              offset.vadd(worldPos, offset); // Get child world quaternion
+
+              child.orientation.mult(worldQuat, orientation); // Get child AABB
+
+              child.calculateWorldAABB(offset, orientation, shapeAABB.lowerBound, shapeAABB.upperBound);
+
+              if (i === 0) {
+                aabb.copy(shapeAABB);
+              } else {
+                aabb.extend(shapeAABB);
+              }
+            }
+
+            min.copy(aabb.lowerBound);
+            max.copy(aabb.upperBound);
+          }
         }, {
           key: "offset",
           get: function get() {
             return this.position;
+          }
+          /**
+           * Shim to better match Shape.
+           * @todo: Remove this.
+           */
+
+        }, {
+          key: "orientation",
+          get: function get() {
+            return this.quaternion;
           }
         }]);
 
@@ -9642,6 +9704,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       Group.idCounter = 0;
       module.exports = Group;
     }, {
+      "../collision/AABB": 3,
       "../math/Vec3": 31
     }],
     42: [function (require, module, exports) {
@@ -10481,6 +10544,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       Shape.prototype.updateBoundingSphereRadius = function () {
         throw 'computeBoundingSphereRadius() not implemented for shape type ' + this.type;
+      };
+      /**
+       * Computes the bounding box for the shape and stores the result in min and max.
+       * @param {Vec3} pos
+       * @param {Quaternion} quat
+       * @param {Vec3} min
+       * @param {Vec3} max
+       */
+
+
+      Shape.prototype.calculateWorldAABB = function (pos, quat, min, max) {
+        throw 'calculateWorldAABB() not implemented for shape type ' + this.type;
       };
       /**
        * Get the volume of this shape
