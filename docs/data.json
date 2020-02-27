@@ -2094,7 +2094,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src\\shapes\\Group.js",
-            "line": 4,
+            "line": 9,
             "description": "Represents a group of shapes within the world. Enables a hierarchy of shapes\nand bodies. Also enables easy construction and destruction of objects.",
             "is_constructor": 1,
             "params": [
@@ -6939,7 +6939,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 694,
+            "line": 695,
             "description": "Update .inertiaWorld and .invInertiaWorld",
             "itemtype": "method",
             "name": "updateInertiaWorld",
@@ -6947,7 +6947,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 717,
+            "line": 718,
             "description": "Apply force to a world point. This could for example be a point on the Body surface. Applying force this way will add to Body.force and Body.torque.",
             "itemtype": "method",
             "name": "applyForce",
@@ -6967,7 +6967,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 742,
+            "line": 743,
             "description": "Apply force to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalForce",
@@ -6987,7 +6987,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 765,
+            "line": 766,
             "description": "Apply impulse to a world point. This could for example be a point on the Body surface. An impulse is a force added to a body during a short period of time (impulse = force * time). Impulses will be added to Body.velocity and Body.angularVelocity.",
             "itemtype": "method",
             "name": "applyImpulse",
@@ -7007,7 +7007,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 805,
+            "line": 806,
             "description": "Apply locally-defined impulse to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalImpulse",
@@ -7027,7 +7027,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 830,
+            "line": 831,
             "description": "Should be called whenever you change the body shape or mass.",
             "itemtype": "method",
             "name": "updateMassProperties",
@@ -7035,7 +7035,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 858,
+            "line": 859,
             "description": "Get world velocity of a point in the body.",
             "itemtype": "method",
             "name": "getVelocityAtWorldPoint",
@@ -7059,7 +7059,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 878,
+            "line": 879,
             "description": "Move the body forward in time.",
             "params": [
                 {
@@ -8619,7 +8619,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 13,
+            "line": 18,
             "description": "Identifier of the Group.",
             "itemtype": "property",
             "name": "id",
@@ -8628,7 +8628,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 19,
+            "line": 24,
             "itemtype": "property",
             "name": "children",
             "type": "{Set}",
@@ -8636,7 +8636,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 25,
+            "line": 30,
             "itemtype": "property",
             "name": "parent",
             "type": "Body|Group",
@@ -8644,7 +8644,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 30,
+            "line": 35,
             "itemtype": "property",
             "name": "position",
             "type": "Vec3",
@@ -8652,7 +8652,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 35,
+            "line": 40,
             "itemtype": "property",
             "name": "quaternion",
             "type": "Quaternion",
@@ -8660,7 +8660,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 40,
+            "line": 45,
             "itemtype": "property",
             "name": "mass",
             "type": "{Number}",
@@ -8669,7 +8669,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 48,
+            "line": 53,
             "description": "The local bounding sphere radius of this group.",
             "itemtype": "property",
             "name": "boundingSphereRadius",
@@ -8678,7 +8678,16 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 55,
+            "line": 59,
+            "description": "World space bounding box of the group and its children.",
+            "itemtype": "property",
+            "name": "aabb",
+            "type": "{AABB}",
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 67,
             "description": "Shim to better match Shape.",
             "todo": [
                 ": Remove this."
@@ -8687,7 +8696,16 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 63,
+            "line": 75,
+            "description": "Shim to better match Shape.",
+            "todo": [
+                ": Remove this."
+            ],
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 83,
             "description": "Sets the parent of the group.",
             "params": [
                 {
@@ -8702,7 +8720,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 75,
+            "line": 95,
             "description": "Adds a child shape or group to this group. Only groups and shapes can be\nchildren, NOT bodies.",
             "params": [
                 {
@@ -8717,7 +8735,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 86,
+            "line": 106,
             "description": "Removes a child from the group.",
             "params": [
                 {
@@ -8732,10 +8750,41 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 98,
+            "line": 118,
             "description": "Computes the bounding sphere radius. The result is stored in the property\n.boundingSphereRadius.",
             "itemtype": "method",
             "name": "updateBoundingSphereRadius",
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 142,
+            "description": "Computes the bounding box for the shape and stores the result in min and max.",
+            "todo": [
+                "Calculate world position and world rotation within group/shape."
+            ],
+            "params": [
+                {
+                    "name": "worldPos",
+                    "description": "",
+                    "type": "Vec3"
+                },
+                {
+                    "name": "worldQuat",
+                    "description": "",
+                    "type": "Quaternion"
+                },
+                {
+                    "name": "min",
+                    "description": "",
+                    "type": "Vec3"
+                },
+                {
+                    "name": "max",
+                    "description": "",
+                    "type": "Vec3"
+                }
+            ],
             "class": "Group"
         },
         {
@@ -9154,6 +9203,34 @@
         {
             "file": "src\\shapes\\Shape.js",
             "line": 97,
+            "description": "Computes the bounding box for the shape and stores the result in min and max.",
+            "params": [
+                {
+                    "name": "pos",
+                    "description": "",
+                    "type": "Vec3"
+                },
+                {
+                    "name": "quat",
+                    "description": "",
+                    "type": "Quaternion"
+                },
+                {
+                    "name": "min",
+                    "description": "",
+                    "type": "Vec3"
+                },
+                {
+                    "name": "max",
+                    "description": "",
+                    "type": "Vec3"
+                }
+            ],
+            "class": "Shape"
+        },
+        {
+            "file": "src\\shapes\\Shape.js",
+            "line": 108,
             "description": "Get the volume of this shape",
             "itemtype": "method",
             "name": "volume",
@@ -9165,7 +9242,7 @@
         },
         {
             "file": "src\\shapes\\Shape.js",
-            "line": 106,
+            "line": 117,
             "description": "Calculates the inertia in the local frame for this shape.",
             "itemtype": "method",
             "name": "calculateLocalInertia",
@@ -9188,7 +9265,7 @@
         },
         {
             "file": "src\\shapes\\Shape.js",
-            "line": 119,
+            "line": 130,
             "description": "The available shape types.",
             "static": 1,
             "itemtype": "property",
@@ -11682,11 +11759,19 @@
         },
         {
             "message": "Missing item type\nMove the body forward in time.",
-            "line": " src\\objects\\Body.js:878"
+            "line": " src\\objects\\Body.js:879"
         },
         {
             "message": "Missing item type\nShim to better match Shape.",
-            "line": " src\\shapes\\Group.js:55"
+            "line": " src\\shapes\\Group.js:67"
+        },
+        {
+            "message": "Missing item type\nShim to better match Shape.",
+            "line": " src\\shapes\\Group.js:75"
+        },
+        {
+            "message": "Missing item type\nComputes the bounding box for the shape and stores the result in min and max.",
+            "line": " src\\shapes\\Group.js:142"
         },
         {
             "message": "Missing item type\nGet an AABB of a square in the heightfield",
@@ -11699,6 +11784,10 @@
         {
             "message": "Missing item type\nGet a triangle from the heightfield",
             "line": " src\\shapes\\Heightfield.js:364"
+        },
+        {
+            "message": "Missing item type\nComputes the bounding box for the shape and stores the result in min and max.",
+            "line": " src\\shapes\\Shape.js:97"
         }
     ]
 }

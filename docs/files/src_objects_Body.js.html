@@ -789,26 +789,27 @@ var computeAABB_shapeAABB = new AABB();
  * @todo rename to updateAABB()
  */
 Body.prototype.computeAABB = function() {
-  var shapes = this.children,
-    N = shapes.length,
-    offset = tmpVec,
-    orientation = tmpQuat,
-    bodyQuat = this.quaternion,
-    aabb = this.aabb,
-    shapeAABB = computeAABB_shapeAABB;
+  const children = this.children;
+  const N = children.length;
 
-  for (var i = 0; i !== N; i++) {
-    var shape = shapes[i];
+  const offset = tmpVec;
+  const orientation = tmpQuat;
+  const bodyQuat = this.quaternion;
+  const aabb = this.aabb;
+  const shapeAABB = computeAABB_shapeAABB;
+
+  for (let i = 0; i !== N; i++) {
+    const child = children[i];
 
     // Get shape world position
-    bodyQuat.vmult(shape.offset, offset);
+    bodyQuat.vmult(child.offset, offset);
     offset.vadd(this.position, offset);
 
     // Get shape world quaternion
-    shape.orientation.mult(bodyQuat, orientation);
+    child.orientation.mult(bodyQuat, orientation);
 
-    // Get shape AABB
-    shape.calculateWorldAABB(
+    // Get child AABB
+    child.calculateWorldAABB(
       offset,
       orientation,
       shapeAABB.lowerBound,
