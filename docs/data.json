@@ -4397,7 +4397,7 @@
         },
         {
             "file": "src\\demo\\Demo.js",
-            "line": 209,
+            "line": 234,
             "description": "Add a scene to the demo app",
             "itemtype": "method",
             "name": "addScene",
@@ -4417,7 +4417,7 @@
         },
         {
             "file": "src\\demo\\Demo.js",
-            "line": 230,
+            "line": 259,
             "description": "Restarts the current scene",
             "itemtype": "method",
             "name": "restartCurrentScene",
@@ -6544,8 +6544,8 @@
             "file": "src\\objects\\Body.js",
             "line": 286,
             "itemtype": "property",
-            "name": "shapes",
-            "type": "{array}",
+            "name": "children",
+            "type": "{Array<Shape|Group>}",
             "class": "Body"
         },
         {
@@ -11014,7 +11014,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 71,
+            "line": 72,
             "description": "Set to true to use fast quaternion normalization. It is often enough accurate to use. If bodies tend to explode, set to false.",
             "itemtype": "property",
             "name": "quatNormalizeFast",
@@ -11028,7 +11028,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 81,
+            "line": 83,
             "description": "The wall-clock time since simulation start",
             "itemtype": "property",
             "name": "time",
@@ -11037,7 +11037,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 88,
+            "line": 90,
             "description": "Number of timesteps taken since start",
             "itemtype": "property",
             "name": "stepnumber",
@@ -11046,7 +11046,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 99,
+            "line": 101,
             "itemtype": "property",
             "name": "gravity",
             "type": "{Vec3}",
@@ -11054,7 +11054,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 108,
+            "line": 110,
             "description": "The broadphase algorithm to use. Default is NaiveBroadphase",
             "itemtype": "property",
             "name": "broadphase",
@@ -11063,7 +11063,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 115,
+            "line": 120,
             "itemtype": "property",
             "name": "bodies",
             "type": "{Array}",
@@ -11071,7 +11071,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 121,
+            "line": 126,
             "description": "The solver algorithm to use. Default is GSSolver",
             "itemtype": "property",
             "name": "solver",
@@ -11080,7 +11080,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 128,
+            "line": 133,
             "itemtype": "property",
             "name": "constraints",
             "type": "{Array}",
@@ -11088,7 +11088,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 134,
+            "line": 139,
             "itemtype": "property",
             "name": "narrowphase",
             "type": "{Narrowphase}",
@@ -11096,7 +11096,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 140,
+            "line": 145,
             "itemtype": "property",
             "name": "collisionMatrix",
             "type": "{ArrayCollisionMatrix}",
@@ -11104,7 +11104,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 146,
+            "line": 151,
             "description": "CollisionMatrix from the previous step.",
             "itemtype": "property",
             "name": "collisionMatrixPrevious",
@@ -11113,7 +11113,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 156,
+            "line": 161,
             "description": "All added materials",
             "itemtype": "property",
             "name": "materials",
@@ -11122,7 +11122,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 163,
+            "line": 168,
             "itemtype": "property",
             "name": "contactmaterials",
             "type": "{Array}",
@@ -11130,7 +11130,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 169,
+            "line": 174,
             "description": "Used to look up a ContactMaterial given two instances of Material.",
             "itemtype": "property",
             "name": "contactMaterialTable",
@@ -11139,7 +11139,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 177,
+            "line": 182,
             "description": "This contact material is used if no suitable contactmaterial is found for a contact.",
             "itemtype": "property",
             "name": "defaultContactMaterial",
@@ -11148,7 +11148,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 184,
+            "line": 193,
             "itemtype": "property",
             "name": "doProfiling",
             "type": "{Boolean}",
@@ -11156,7 +11156,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 190,
+            "line": 199,
             "itemtype": "property",
             "name": "profile",
             "type": "{Object}",
@@ -11164,7 +11164,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 202,
+            "line": 211,
             "description": "Time accumulator for interpolation. See http://gafferongames.com/game-physics/fix-your-timestep/",
             "itemtype": "property",
             "name": "accumulator",
@@ -11173,7 +11173,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 208,
+            "line": 217,
             "itemtype": "property",
             "name": "subsystems",
             "type": "{Array}",
@@ -11181,7 +11181,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 214,
+            "line": 223,
             "description": "Dispatched after a body has been added to the world.",
             "itemtype": "event",
             "name": "addBody",
@@ -11196,7 +11196,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 224,
+            "line": 233,
             "description": "Dispatched after a body has been removed from the world.",
             "itemtype": "event",
             "name": "removeBody",
@@ -11211,7 +11211,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 245,
+            "line": 254,
             "description": "Get the contact material between materials m1 and m2",
             "itemtype": "method",
             "name": "getContactMaterial",
@@ -11235,7 +11235,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 256,
+            "line": 265,
             "description": "Get number of objects in the world.",
             "itemtype": "method",
             "name": "numObjects",
@@ -11248,7 +11248,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 266,
+            "line": 275,
             "description": "Store old collision state info",
             "itemtype": "method",
             "name": "collisionMatrixTick",
@@ -11256,7 +11256,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 280,
+            "line": 289,
             "description": "Add a rigid body to the simulation.",
             "itemtype": "method",
             "name": "add",
@@ -11278,7 +11278,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 308,
+            "line": 317,
             "description": "Add a constraint to the simulation.",
             "itemtype": "method",
             "name": "addConstraint",
@@ -11293,7 +11293,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 317,
+            "line": 326,
             "description": "Removes a constraint",
             "itemtype": "method",
             "name": "removeConstraint",
@@ -11308,7 +11308,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 329,
+            "line": 338,
             "description": "Raycast test",
             "itemtype": "method",
             "name": "rayTest",
@@ -11335,7 +11335,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 351,
+            "line": 370,
             "description": "Ray cast against all bodies. The provided callback will be executed for each hit with a RaycastResult as single argument.",
             "itemtype": "method",
             "name": "raycastAll",
@@ -11399,7 +11399,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 372,
+            "line": 391,
             "description": "Ray cast, and stop at the first result. Note that the order is random - but the method is fast.",
             "itemtype": "method",
             "name": "raycastAny",
@@ -11463,7 +11463,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 393,
+            "line": 412,
             "description": "Ray cast, and return information of the closest hit.",
             "itemtype": "method",
             "name": "raycastClosest",
@@ -11527,7 +11527,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 414,
+            "line": 433,
             "description": "Remove a rigid body from the simulation.",
             "itemtype": "method",
             "name": "remove",
@@ -11544,7 +11544,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 440,
+            "line": 459,
             "description": "Remove a rigid body from the simulation.",
             "itemtype": "method",
             "name": "removeBody",
@@ -11559,7 +11559,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 465,
+            "line": 484,
             "description": "Adds a material to the World.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -11577,7 +11577,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 475,
+            "line": 494,
             "description": "Adds a contact material to the World",
             "itemtype": "method",
             "name": "addContactMaterial",
@@ -11592,7 +11592,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 505,
+            "line": 527,
             "description": "Step the physics world forward in time.\n\nThere are two modes. The simple mode is fixed timestepping without interpolation. In this case you only use the first argument. The second case uses interpolation. In that you also provide the time since the function was last used, as well as the maximum fixed timesteps to take.",
             "itemtype": "method",
             "name": "step",
@@ -11626,15 +11626,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 555,
-            "description": "Dispatched after the world has stepped forward in time.",
-            "itemtype": "event",
-            "name": "postStep",
-            "class": "World"
-        },
-        {
-            "file": "src\\world\\World.js",
-            "line": 560,
+            "line": 580,
             "description": "Dispatched before the world steps forward in time.",
             "itemtype": "event",
             "name": "preStep",
@@ -11642,7 +11634,7 @@
         },
         {
             "file": "src\\world\\World.js",
-            "line": 1017,
+            "line": 1058,
             "description": "Sets all body forces in the world to zero.",
             "itemtype": "method",
             "name": "clearForces",

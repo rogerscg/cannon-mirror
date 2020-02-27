@@ -275,18 +275,18 @@ Narrowphase.prototype.getContacts = function(
       (bi.type & Body.STATIC && bj.type & Body.KINEMATIC) ||
       (bi.type & Body.KINEMATIC && bj.type & Body.KINEMATIC);
 
-    for (var i = 0; i < bi.shapes.length; i++) {
-      bi.quaternion.mult(bi.shapes[i].orientation, qi);
-      bi.quaternion.vmult(bi.shapes[i].offset, xi);
+    for (var i = 0; i < bi.children.length; i++) {
+      bi.quaternion.mult(bi.children[i].orientation, qi);
+      bi.quaternion.vmult(bi.children[i].offset, xi);
       xi.vadd(bi.position, xi);
-      var si = bi.shapes[i];
+      var si = bi.children[i];
 
-      for (var j = 0; j < bj.shapes.length; j++) {
+      for (var j = 0; j < bj.children.length; j++) {
         // Compute world transform of shapes
-        bj.quaternion.mult(bj.shapes[j].orientation, qj);
-        bj.quaternion.vmult(bj.shapes[j].offset, xj);
+        bj.quaternion.mult(bj.children[j].orientation, qj);
+        bj.quaternion.vmult(bj.children[j].offset, xj);
         xj.vadd(bj.position, xj);
-        var sj = bj.shapes[j];
+        var sj = bj.children[j];
 
         if (
           !(

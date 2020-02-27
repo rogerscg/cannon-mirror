@@ -1569,8 +1569,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var xi = intersectBody_xi;
         var qi = intersectBody_qi;
 
-        for (var i = 0, N = body.shapes.length; i < N; i++) {
-          var shape = body.shapes[i];
+        for (var i = 0, N = body.children.length; i < N; i++) {
+          var shape = body.children[i];
 
           if (checkCollisionResponse && !shape.collisionResponse) {
             continue; // Skip
@@ -5971,11 +5971,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         this.initAngularVelocity = new Vec3();
         /**
-         * @property shapes
+         * @property children
          * @type {array}
          */
 
-        this.shapes = [];
+        this.children = [];
         /**
          * @property inertia
          * @type {Vec3}
@@ -6300,7 +6300,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           orientation.copy(_orientation);
         }
 
-        this.shapes.push(shape);
+        this.children.push(shape);
         shape.offset = offset;
         shape.orientation = orientation;
         this.updateMassProperties();
@@ -6316,7 +6316,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
       Body.prototype.updateBoundingRadius = function () {
-        var shapes = this.shapes,
+        var shapes = this.children,
             N = shapes.length,
             radius = 0;
 
@@ -6342,7 +6342,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
       Body.prototype.computeAABB = function () {
-        var shapes = this.shapes,
+        var shapes = this.children,
             N = shapes.length,
             offset = tmpVec,
             orientation = tmpQuat,
@@ -9489,16 +9489,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       /**
        * Represents a group of shapes within the world. Enables a hierarchy of shapes
        * and bodies. Also enables easy construction and destruction of objects.
-       * @class {Group}
+       * @constructor
+       * @class Group
+       * @param {Number} mass
        */
 
 
       var Group =
       /*#__PURE__*/
       function () {
-        /**
-         * @param {Number} mass
-         */
         function Group() {
           var mass = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
@@ -9542,6 +9541,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         /**
          * Sets the parent of the group.
          * @param {Body|Group} parent
+         * @method setParent
          */
 
 
@@ -9558,6 +9558,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
            * Adds a child shape or group to this group. Only groups and shapes can be
            * children, NOT bodies.
            * @param {Group|Shape} child
+           * @method add
            */
 
         }, {
@@ -9569,6 +9570,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           /**
            * Removes a child from the group.
            * @param {Group|Shape} child
+           * @method remove
            */
 
         }, {
@@ -12344,18 +12346,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           var justTest = bi.type & Body.KINEMATIC && bj.type & Body.STATIC || bi.type & Body.STATIC && bj.type & Body.KINEMATIC || bi.type & Body.KINEMATIC && bj.type & Body.KINEMATIC;
 
-          for (var i = 0; i < bi.shapes.length; i++) {
-            bi.quaternion.mult(bi.shapes[i].orientation, qi);
-            bi.quaternion.vmult(bi.shapes[i].offset, xi);
+          for (var i = 0; i < bi.children.length; i++) {
+            bi.quaternion.mult(bi.children[i].orientation, qi);
+            bi.quaternion.vmult(bi.children[i].offset, xi);
             xi.vadd(bi.position, xi);
-            var si = bi.shapes[i];
+            var si = bi.children[i];
 
-            for (var j = 0; j < bj.shapes.length; j++) {
+            for (var j = 0; j < bj.children.length; j++) {
               // Compute world transform of shapes
-              bj.quaternion.mult(bj.shapes[j].orientation, qj);
-              bj.quaternion.vmult(bj.shapes[j].offset, xj);
+              bj.quaternion.mult(bj.children[j].orientation, qj);
+              bj.quaternion.vmult(bj.children[j].offset, xj);
               xj.vadd(bj.position, xj);
-              var sj = bj.shapes[j];
+              var sj = bj.children[j];
 
               if (!(si.collisionFilterMask & sj.collisionFilterGroup && sj.collisionFilterMask & si.collisionFilterGroup)) {
                 continue;
@@ -14015,15 +14017,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         this.narrowphase = new Narrowphase(this);
         /**
          * @property {ArrayCollisionMatrix} collisionMatrix
-        * @type {ArrayCollisionMatrix}
-        */
+         * @type {ArrayCollisionMatrix}
+         */
 
         this.collisionMatrix = new ArrayCollisionMatrix();
         /**
          * CollisionMatrix from the previous step.
          * @property {ArrayCollisionMatrix} collisionMatrixPrevious
-        * @type {ArrayCollisionMatrix}
-        */
+         * @type {ArrayCollisionMatrix}
+         */
 
         this.collisionMatrixPrevious = new ArrayCollisionMatrix();
         this.bodyOverlapKeeper = new OverlapKeeper();
@@ -14047,7 +14049,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
          */
 
         this.contactMaterialTable = new TupleDictionary();
-        this.defaultMaterial = new Material("default");
+        this.defaultMaterial = new Material('default');
         /**
          * This contact material is used if no suitable contactmaterial is found for a contact.
          * @property defaultContactMaterial
@@ -14095,7 +14097,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
          */
 
         this.addBodyEvent = {
-          type: "addBody",
+          type: 'addBody',
           body: null
         };
         /**
@@ -14105,7 +14107,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
          */
 
         this.removeBodyEvent = {
-          type: "removeBody",
+          type: 'removeBody',
           body: null
         };
         this.idToBodyMap = {};
@@ -14344,7 +14346,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var bodies = this.bodies;
 
         for (var i = 0, bl = bodies.length; i < bl; i++) {
-          var shapes = bodies[i].shapes;
+          var shapes = bodies[i].children;
 
           for (var j = 0, sl = shapes.length; j < sl; j++) {
             var shape = shapes[j];
@@ -14450,11 +14452,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       var
       /**
-       * Dispatched after the world has stepped forward in time.
-       * @event postStep
-       */
+      * Dispatched after the world has stepped forward in time.
+      * @event postStep
+      */
       World_step_postStepEvent = {
-        type: "postStep"
+        type: 'postStep'
       },
           // Reusable event objects to save memory
 
@@ -14463,7 +14465,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        * @event preStep
        */
       World_step_preStepEvent = {
-        type: "preStep"
+        type: 'preStep'
       },
           World_step_collideEvent = {
         type: Body.COLLIDE_EVENT_NAME,

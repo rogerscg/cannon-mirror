@@ -42,8 +42,8 @@ THREE.CannonDebugRenderer.prototype = {
     for (var i = 0; i !== bodies.length; i++) {
       var body = bodies[i];
 
-      for (var j = 0; j !== body.shapes.length; j++) {
-        var shape = body.shapes[j];
+      for (var j = 0; j !== body.children.length; j++) {
+        var shape = body.children[j];
 
         this._updateMesh(meshIndex, body, shape);
 

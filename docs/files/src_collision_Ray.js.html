@@ -330,8 +330,8 @@ Ray.prototype.intersectBody = function(body, result) {
   var xi = intersectBody_xi;
   var qi = intersectBody_qi;
 
-  for (var i = 0, N = body.shapes.length; i &lt; N; i++) {
-    var shape = body.shapes[i];
+  for (var i = 0, N = body.children.length; i &lt; N; i++) {
+    var shape = body.children[i];
 
     if (checkCollisionResponse &amp;&amp; !shape.collisionResponse) {
       continue; // Skip

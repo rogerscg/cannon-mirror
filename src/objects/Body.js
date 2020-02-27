@@ -284,10 +284,10 @@ function Body(options) {
   this.initAngularVelocity = new Vec3();
 
   /**
-   * @property shapes
-   * @type {array}
+   * @property children
+   * @type {Array<Shape|Group>}
    */
-  this.shapes = [];
+  this.children = [];
 
   /**
    * @property inertia
@@ -607,7 +607,7 @@ Body.prototype.addShape = function(shape, _offset, _orientation) {
     orientation.copy(_orientation);
   }
 
-  this.shapes.push(shape);
+  this.children.push(shape);
   shape.offset = offset;
   shape.orientation = orientation;
   this.updateMassProperties();
@@ -625,7 +625,7 @@ Body.prototype.addShape = function(shape, _offset, _orientation) {
  * @method updateBoundingRadius
  */
 Body.prototype.updateBoundingRadius = function() {
-  var shapes = this.shapes,
+  var shapes = this.children,
     N = shapes.length,
     radius = 0;
 
@@ -650,7 +650,7 @@ var computeAABB_shapeAABB = new AABB();
  * @todo rename to updateAABB()
  */
 Body.prototype.computeAABB = function() {
-  var shapes = this.shapes,
+  var shapes = this.children,
     N = shapes.length,
     offset = tmpVec,
     orientation = tmpQuat,

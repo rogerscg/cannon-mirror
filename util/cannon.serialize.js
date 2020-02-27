@@ -48,8 +48,8 @@ CANNON.World.prototype.toJSON = function() {
       shapes: []
     };
 
-    for (var j = 0; j < body.shapes.length; j++) {
-      var shape = body.shapes[j];
+    for (var j = 0; j < body.children.length; j++) {
+      var shape = body.children[j];
       var jsonShape = {
         type: shape.type
       };
@@ -66,7 +66,7 @@ CANNON.World.prototype.toJSON = function() {
       }
       jsonShape.offset = v2a(shape.offset);
       jsonShape.orientation = q2a(shape.orientation);
-      jsonBody.shapes.push(jsonShape);
+      jsonBody.children.push(jsonShape);
     }
 
     json.bodies.push(jsonBody);
@@ -100,8 +100,8 @@ CANNON.World.prototype.fromJSON = function(json) {
       quaternion: a2q(jsonBody.quaternion)
     });
 
-    for (var j = 0; j < jsonBody.shapes.length; j++) {
-      var jsonShape = jsonBody.shapes[j];
+    for (var j = 0; j < jsonBody.children.length; j++) {
+      var jsonShape = jsonBody.children[j];
       var shape;
       var offset = a2v(jsonShape.offset);
       var orientation = a2q(jsonBody.orientation);
