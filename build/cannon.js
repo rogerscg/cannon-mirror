@@ -1,4 +1,4 @@
-// Thu, 27 Feb 2020 01:23:10 GMT
+// Thu, 27 Feb 2020 04:23:08 GMT
 
 /*
  * Copyright (c) 2015 cannon.js Authors
@@ -9296,7 +9296,7 @@ Cylinder.prototype = new ConvexPolyhedron();
 
 },{"../math/Quaternion":29,"../math/Vec3":31,"./ConvexPolyhedron":39,"./Shape":45}],41:[function(require,module,exports){
 const AABB = require('../collision/AABB');
-const Quaternion = require('../math/Vec3');
+const Quaternion = require('../math/Quaternion');
 const Vec3 = require('../math/Vec3');
 
 const tmpAABB = new AABB();
@@ -9396,7 +9396,8 @@ class Group {
    * @method add
    */
   add(child) {
-    child.setParent(this);
+    // TODO: Set parent as well.
+    //child.setParent(this);
     this.children.add(child);
   }
 
@@ -9433,7 +9434,7 @@ class Group {
       }
     }
 
-    this.boundingRadius = radius;
+    this.boundingSphereRadius = radius;
   }
 
   /**
@@ -9485,7 +9486,7 @@ Group.idCounter = 0;
 
 module.exports = Group;
 
-},{"../collision/AABB":3,"../math/Vec3":31}],42:[function(require,module,exports){
+},{"../collision/AABB":3,"../math/Quaternion":29,"../math/Vec3":31}],42:[function(require,module,exports){
 var Shape = require('./Shape');
 var ConvexPolyhedron = require('./ConvexPolyhedron');
 var Vec3 = require('../math/Vec3');

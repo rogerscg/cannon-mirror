@@ -9494,7 +9494,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     41: [function (require, module, exports) {
       var AABB = require('../collision/AABB');
 
-      var Quaternion = require('../math/Vec3');
+      var Quaternion = require('../math/Quaternion');
 
       var Vec3 = require('../math/Vec3');
 
@@ -9596,7 +9596,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, {
           key: "add",
           value: function add(child) {
-            child.setParent(this);
+            // TODO: Set parent as well.
+            //child.setParent(this);
             this.children.add(child);
           }
           /**
@@ -9639,7 +9640,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
             }
 
-            this.boundingRadius = radius;
+            this.boundingSphereRadius = radius;
           }
           /**
            * Computes the bounding box for the shape and stores the result in min and max.
@@ -9705,6 +9706,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       module.exports = Group;
     }, {
       "../collision/AABB": 3,
+      "../math/Quaternion": 29,
       "../math/Vec3": 31
     }],
     42: [function (require, module, exports) {

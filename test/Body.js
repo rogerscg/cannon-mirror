@@ -88,8 +88,8 @@ module.exports = {
     bodyB.addShape(sphereShape);
 
     test.deepEqual(
-      bodyA.children,
-      bodyB.children,
+      bodyA.shapes,
+      bodyB.shapes,
       'Adding shape via options did not work.'
     );
     test.deepEqual(bodyA.inertia, bodyB.inertia);

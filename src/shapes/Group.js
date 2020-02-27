@@ -1,5 +1,5 @@
 const AABB = require('../collision/AABB');
-const Quaternion = require('../math/Vec3');
+const Quaternion = require('../math/Quaternion');
 const Vec3 = require('../math/Vec3');
 
 const tmpAABB = new AABB();
@@ -99,7 +99,8 @@ class Group {
    * @method add
    */
   add(child) {
-    child.setParent(this);
+    // TODO: Set parent as well.
+    //child.setParent(this);
     this.children.add(child);
   }
 
@@ -136,7 +137,7 @@ class Group {
       }
     }
 
-    this.boundingRadius = radius;
+    this.boundingSphereRadius = radius;
   }
 
   /**

@@ -137,7 +137,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 const AABB = require(&#x27;../collision/AABB&#x27;);
-const Quaternion = require(&#x27;../math/Vec3&#x27;);
+const Quaternion = require(&#x27;../math/Quaternion&#x27;);
 const Vec3 = require(&#x27;../math/Vec3&#x27;);
 
 const tmpAABB = new AABB();
@@ -237,7 +237,8 @@ class Group {
    * @method add
    */
   add(child) {
-    child.setParent(this);
+    // TODO: Set parent as well.
+    //child.setParent(this);
     this.children.add(child);
   }
 
@@ -274,7 +275,7 @@ class Group {
       }
     }
 
-    this.boundingRadius = radius;
+    this.boundingSphereRadius = radius;
   }
 
   /**
