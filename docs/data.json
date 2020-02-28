@@ -6921,6 +6921,25 @@
         {
             "file": "src\\objects\\Body.js",
             "line": 623,
+            "description": "Add a group or shape to the body.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "Group|Shape"
+                }
+            ],
+            "return": {
+                "description": "The body object, for chainability.",
+                "type": "Body"
+            },
+            "class": "Body"
+        },
+        {
+            "file": "src\\objects\\Body.js",
+            "line": 639,
             "description": "Update the bounding radius of the body. Should be done if any of the children\nare changed.",
             "itemtype": "method",
             "name": "updateBoundingRadius",
@@ -6928,7 +6947,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 648,
+            "line": 664,
             "description": "Updates the .aabb",
             "itemtype": "method",
             "name": "computeAABB",
@@ -6939,7 +6958,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 695,
+            "line": 711,
             "description": "Update .inertiaWorld and .invInertiaWorld",
             "itemtype": "method",
             "name": "updateInertiaWorld",
@@ -6947,7 +6966,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 718,
+            "line": 734,
             "description": "Apply force to a world point. This could for example be a point on the Body surface. Applying force this way will add to Body.force and Body.torque.",
             "itemtype": "method",
             "name": "applyForce",
@@ -6967,7 +6986,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 743,
+            "line": 759,
             "description": "Apply force to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalForce",
@@ -6987,7 +7006,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 766,
+            "line": 782,
             "description": "Apply impulse to a world point. This could for example be a point on the Body surface. An impulse is a force added to a body during a short period of time (impulse = force * time). Impulses will be added to Body.velocity and Body.angularVelocity.",
             "itemtype": "method",
             "name": "applyImpulse",
@@ -7007,7 +7026,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 806,
+            "line": 822,
             "description": "Apply locally-defined impulse to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalImpulse",
@@ -7027,7 +7046,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 831,
+            "line": 847,
             "description": "Should be called whenever you change the body shape or mass.",
             "itemtype": "method",
             "name": "updateMassProperties",
@@ -7035,7 +7054,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 859,
+            "line": 875,
             "description": "Get world velocity of a point in the body.",
             "itemtype": "method",
             "name": "getVelocityAtWorldPoint",
@@ -7059,7 +7078,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 879,
+            "line": 895,
             "description": "Move the body forward in time.",
             "params": [
                 {
@@ -11759,7 +11778,7 @@
         },
         {
             "message": "Missing item type\nMove the body forward in time.",
-            "line": " src\\objects\\Body.js:879"
+            "line": " src\\objects\\Body.js:895"
         },
         {
             "message": "Missing item type\nShim to better match Shape.",

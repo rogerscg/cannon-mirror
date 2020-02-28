@@ -1,4 +1,4 @@
-// Thu, 27 Feb 2020 04:23:08 GMT
+// Fri, 28 Feb 2020 04:29:50 GMT
 
 /*
  * Copyright (c) 2015 cannon.js Authors
@@ -6106,6 +6106,22 @@ Body.prototype.addShape = function(shape, _offset, _orientation) {
 
   shape.body = this;
 
+  return this;
+};
+
+/**
+ * Add a group or shape to the body.
+ * @method add
+ * @param {Group|Shape} child
+ * @return {Body} The body object, for chainability.
+ */
+Body.prototype.add = function(child) {
+  this.children.push(child);
+  this.updateMassProperties();
+  this.updateBoundingRadius();
+
+  this.aabbNeedsUpdate = true;
+  // @todo: Set parent of shape/group.
   return this;
 };
 

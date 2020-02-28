@@ -1,9 +1,9 @@
-var Vec3 = require('../src/math/Vec3');
-var Mat3 = require('../src/math/Mat3');
-var Quaternion = require('../src/math/Quaternion');
-var Box = require('../src/shapes/Box');
-var Sphere = require('../src/shapes/Sphere');
 var Body = require('../src/objects/Body');
+var Box = require('../src/shapes/Box');
+var Group = require('../src/shapes/Group');
+var Quaternion = require('../src/math/Quaternion');
+var Sphere = require('../src/shapes/Sphere');
+var Vec3 = require('../src/math/Vec3');
 
 module.exports = {
   computeAABB: {
@@ -44,6 +44,25 @@ module.exports = {
 
       test.equal(body.aabb.lowerBound.x, 1);
       test.equal(body.aabb.upperBound.x, 3);
+
+      test.done();
+    },
+    boxOffsetWithGroup: function(test) {
+      var quaternion = new Quaternion();
+      quaternion.setFromAxisAngle(new Vec3(0, 0, 1), Math.PI / 2);
+      var body = new Body({ mass: 1 });
+      var shape = new Box(new Vec3(1, 1, 1));
+      shape.offset = new Vec3(1, 1, 1);
+      var group = new Group();
+      group.add(shape);
+      body.add(group);
+      body.computeAABB();
+      test.equal(body.aabb.lowerBound.x, 0);
+      test.equal(body.aabb.lowerBound.y, 0);
+      test.equal(body.aabb.lowerBound.z, 0);
+      test.equal(body.aabb.upperBound.x, 2);
+      test.equal(body.aabb.upperBound.y, 2);
+      test.equal(body.aabb.upperBound.z, 2);
 
       test.done();
     }

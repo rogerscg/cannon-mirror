@@ -6318,6 +6318,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return this;
       };
       /**
+       * Add a group or shape to the body.
+       * @method add
+       * @param {Group|Shape} child
+       * @return {Body} The body object, for chainability.
+       */
+
+
+      Body.prototype.add = function (child) {
+        this.children.push(child);
+        this.updateMassProperties();
+        this.updateBoundingRadius();
+        this.aabbNeedsUpdate = true; // @todo: Set parent of shape/group.
+
+        return this;
+      };
+      /**
        * Update the bounding radius of the body. Should be done if any of the children
        * are changed.
        * @method updateBoundingRadius
