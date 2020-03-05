@@ -227,6 +227,22 @@ and bodies. Also enables easy construction and destruction of objects.</p>
 
                             </li>
                             <li class="index-item method">
+                                <a href="#method_calculateWorldPositionAndRotation">calculateWorldPositionAndRotation</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getAllComponents">getAllComponents</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getShapePositionAndRotation">getShapePositionAndRotation</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getShapes">getShapes</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_remove">remove</a>
 
                             </li>
@@ -277,6 +293,14 @@ and bodies. Also enables easy construction and destruction of objects.</p>
                                 <a href="#property_quaternion">quaternion</a>
 
                             </li>
+                            <li class="index-item property">
+                                <a href="#property_worldPosition">worldPosition</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_worldQuaternion">worldQuaternion</a>
+
+                            </li>
                     </ul>
                 </div>
 
@@ -307,7 +331,7 @@ and bodies. Also enables easy construction and destruction of objects.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_shapes_Group.js.html#l95"><code>src\shapes\Group.js:95</code></a>
+        <a href="../files/src_shapes_Group.js.html#l108"><code>src\shapes\Group.js:108</code></a>
         </p>
 
 
@@ -340,6 +364,198 @@ children, NOT bodies.</p>
 
 
 </div>
+<div id="method_calculateWorldPositionAndRotation" class="method item">
+    <h3 class="name"><code>calculateWorldPositionAndRotation</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l224"><code>src\shapes\Group.js:224</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Calculates the world position and rotation of the group.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_getAllComponents" class="method item">
+    <h3 class="name"><code>getAllComponents</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l199"><code>src\shapes\Group.js:199</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Gets all &quot;components&quot;, aka Groups/Bodies, that are children of the group.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getShapePositionAndRotation" class="method item">
+    <h3 class="name"><code>getShapePositionAndRotation</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>shape</code>
+                </li>
+                <li class="arg">
+                        <code>targetQuaternion</code>
+                </li>
+                <li class="arg">
+                        <code>targetPosition</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l242"><code>src\shapes\Group.js:242</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Calculates the world quaternion and position of the given shape.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">shape</code>
+                        <span class="type"><a href="../classes/Shape.html" class="crosslink">Shape</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">targetQuaternion</code>
+                        <span class="type"><a href="../classes/Quaternion.html" class="crosslink">Quaternion</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">targetPosition</code>
+                        <span class="type"><a href="../classes/Vec3.html" class="crosslink">Vec3</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_getShapes" class="method item">
+    <h3 class="name"><code>getShapes</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l215"><code>src\shapes\Group.js:215</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Gets all first-level shapes of the group.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+            </div>
+        </div>
+
+
+</div>
 <div id="method_remove" class="method item">
     <h3 class="name"><code>remove</code></h3>
 
@@ -361,7 +577,7 @@ children, NOT bodies.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_shapes_Group.js.html#l106"><code>src\shapes\Group.js:106</code></a>
+        <a href="../files/src_shapes_Group.js.html#l119"><code>src\shapes\Group.js:119</code></a>
         </p>
 
 
@@ -414,7 +630,7 @@ children, NOT bodies.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_shapes_Group.js.html#l83"><code>src\shapes\Group.js:83</code></a>
+        <a href="../files/src_shapes_Group.js.html#l96"><code>src\shapes\Group.js:96</code></a>
         </p>
 
 
@@ -461,7 +677,7 @@ children, NOT bodies.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_shapes_Group.js.html#l118"><code>src\shapes\Group.js:118</code></a>
+        <a href="../files/src_shapes_Group.js.html#l131"><code>src\shapes\Group.js:131</code></a>
         </p>
 
 
@@ -494,7 +710,7 @@ children, NOT bodies.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_shapes_Group.js.html#l59"><code>src\shapes\Group.js:59</code></a>
+        <a href="../files/src_shapes_Group.js.html#l69"><code>src\shapes\Group.js:69</code></a>
         </p>
 
 
@@ -519,7 +735,7 @@ children, NOT bodies.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_shapes_Group.js.html#l53"><code>src\shapes\Group.js:53</code></a>
+        <a href="../files/src_shapes_Group.js.html#l63"><code>src\shapes\Group.js:63</code></a>
         </p>
 
 
@@ -593,7 +809,7 @@ children, NOT bodies.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_shapes_Group.js.html#l45"><code>src\shapes\Group.js:45</code></a>
+        <a href="../files/src_shapes_Group.js.html#l55"><code>src\shapes\Group.js:55</code></a>
         </p>
 
 
@@ -667,6 +883,54 @@ children, NOT bodies.</p>
                 <p>
                 Defined in
         <a href="../files/src_shapes_Group.js.html#l40"><code>src\shapes\Group.js:40</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+</div>
+<div id="property_worldPosition" class="property item">
+    <h3 class="name"><code>worldPosition</code></h3>
+    <span class="type"><a href="../classes/Vec3.html" class="crosslink">Vec3</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l45"><code>src\shapes\Group.js:45</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+</div>
+<div id="property_worldQuaternion" class="property item">
+    <h3 class="name"><code>worldQuaternion</code></h3>
+    <span class="type"><a href="../classes/Quaternion.html" class="crosslink">Quaternion</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_shapes_Group.js.html#l50"><code>src\shapes\Group.js:50</code></a>
         </p>
 
 

@@ -462,6 +462,18 @@ world.addBody(body);</code></pre>
 
                             </li>
                             <li class="index-item method">
+                                <a href="#method_getAllComponents">getAllComponents</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getShapePositionAndRotation">getShapePositionAndRotation</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getShapes">getShapes</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_getVelocityAtWorldPoint">getVelocityAtWorldPoint</a>
 
                             </li>
@@ -787,7 +799,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l626"><code>src\objects\Body.js:626</code></a>
+        <a href="../files/src_objects_Body.js.html#l632"><code>src\objects\Body.js:632</code></a>
         </p>
 
 
@@ -934,7 +946,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l591"><code>src\objects\Body.js:591</code></a>
+        <a href="../files/src_objects_Body.js.html#l597"><code>src\objects\Body.js:597</code></a>
         </p>
 
 
@@ -1021,7 +1033,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l616"><code>src\objects\Body.js:616</code></a>
+        <a href="../files/src_objects_Body.js.html#l622"><code>src\objects\Body.js:622</code></a>
         </p>
 
 
@@ -1086,7 +1098,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l757"><code>src\objects\Body.js:757</code></a>
+        <a href="../files/src_objects_Body.js.html#l763"><code>src\objects\Body.js:763</code></a>
         </p>
 
 
@@ -1154,7 +1166,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l805"><code>src\objects\Body.js:805</code></a>
+        <a href="../files/src_objects_Body.js.html#l811"><code>src\objects\Body.js:811</code></a>
         </p>
 
 
@@ -1222,7 +1234,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l782"><code>src\objects\Body.js:782</code></a>
+        <a href="../files/src_objects_Body.js.html#l788"><code>src\objects\Body.js:788</code></a>
         </p>
 
 
@@ -1290,7 +1302,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l845"><code>src\objects\Body.js:845</code></a>
+        <a href="../files/src_objects_Body.js.html#l851"><code>src\objects\Body.js:851</code></a>
         </p>
 
 
@@ -1349,7 +1361,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l687"><code>src\objects\Body.js:687</code></a>
+        <a href="../files/src_objects_Body.js.html#l693"><code>src\objects\Body.js:693</code></a>
         </p>
 
 
@@ -1439,6 +1451,167 @@ world.addBody(body);</code></pre>
 
 
 </div>
+<div id="method_getAllComponents" class="method item">
+    <h3 class="name"><code>getAllComponents</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_objects_Body.js.html#l988"><code>src\objects\Body.js:988</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Gets all &quot;components&quot;, aka Groups/Bodies, that are children of the body.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getShapePositionAndRotation" class="method item">
+    <h3 class="name"><code>getShapePositionAndRotation</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>shape</code>
+                </li>
+                <li class="arg">
+                        <code>targetQuaternion</code>
+                </li>
+                <li class="arg">
+                        <code>targetPosition</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_objects_Body.js.html#l1013"><code>src\objects\Body.js:1013</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Calculates the world quaternion and position of the given shape.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">shape</code>
+                        <span class="type"><a href="../classes/Shape.html" class="crosslink">Shape</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">targetQuaternion</code>
+                        <span class="type"><a href="../classes/Quaternion.html" class="crosslink">Quaternion</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">targetPosition</code>
+                        <span class="type"><a href="../classes/Vec3.html" class="crosslink">Vec3</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_getShapes" class="method item">
+    <h3 class="name"><code>getShapes</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_objects_Body.js.html#l1004"><code>src\objects\Body.js:1004</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Gets all first-level shapes of the body.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+            </div>
+        </div>
+
+
+</div>
 <div id="method_getVelocityAtWorldPoint" class="method item">
     <h3 class="name"><code>getVelocityAtWorldPoint</code></h3>
 
@@ -1466,7 +1639,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l898"><code>src\objects\Body.js:898</code></a>
+        <a href="../files/src_objects_Body.js.html#l904"><code>src\objects\Body.js:904</code></a>
         </p>
 
 
@@ -1681,7 +1854,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l534"><code>src\objects\Body.js:534</code></a>
+        <a href="../files/src_objects_Body.js.html#l540"><code>src\objects\Body.js:540</code></a>
         </p>
 
 
@@ -1757,7 +1930,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l561"><code>src\objects\Body.js:561</code></a>
+        <a href="../files/src_objects_Body.js.html#l567"><code>src\objects\Body.js:567</code></a>
         </p>
 
 
@@ -1830,7 +2003,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l642"><code>src\objects\Body.js:642</code></a>
+        <a href="../files/src_objects_Body.js.html#l648"><code>src\objects\Body.js:648</code></a>
         </p>
 
 
@@ -1962,7 +2135,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l465"><code>src\objects\Body.js:465</code></a>
+        <a href="../files/src_objects_Body.js.html#l471"><code>src\objects\Body.js:471</code></a>
         </p>
 
 
@@ -1999,7 +2172,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l492"><code>src\objects\Body.js:492</code></a>
+        <a href="../files/src_objects_Body.js.html#l498"><code>src\objects\Body.js:498</code></a>
         </p>
 
 
@@ -2047,7 +2220,7 @@ world.addBody(body);</code></pre>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l662"><code>src\objects\Body.js:662</code></a>
+        <a href="../files/src_objects_Body.js.html#l668"><code>src\objects\Body.js:668</code></a>
         </p>
 
 
@@ -2079,7 +2252,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l734"><code>src\objects\Body.js:734</code></a>
+        <a href="../files/src_objects_Body.js.html#l740"><code>src\objects\Body.js:740</code></a>
         </p>
 
 
@@ -2110,7 +2283,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l870"><code>src\objects\Body.js:870</code></a>
+        <a href="../files/src_objects_Body.js.html#l876"><code>src\objects\Body.js:876</code></a>
         </p>
 
 
@@ -2141,7 +2314,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l518"><code>src\objects\Body.js:518</code></a>
+        <a href="../files/src_objects_Body.js.html#l524"><code>src\objects\Body.js:524</code></a>
         </p>
 
 
@@ -2184,7 +2357,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l548"><code>src\objects\Body.js:548</code></a>
+        <a href="../files/src_objects_Body.js.html#l554"><code>src\objects\Body.js:554</code></a>
         </p>
 
 
@@ -2260,7 +2433,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l575"><code>src\objects\Body.js:575</code></a>
+        <a href="../files/src_objects_Body.js.html#l581"><code>src\objects\Body.js:581</code></a>
         </p>
 
 
@@ -2324,7 +2497,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l452"><code>src\objects\Body.js:452</code></a>
+        <a href="../files/src_objects_Body.js.html#l458"><code>src\objects\Body.js:458</code></a>
         </p>
 
 
@@ -2356,7 +2529,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l356"><code>src\objects\Body.js:356</code></a>
+        <a href="../files/src_objects_Body.js.html#l360"><code>src\objects\Body.js:360</code></a>
         </p>
 
 
@@ -2381,7 +2554,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l363"><code>src\objects\Body.js:363</code></a>
+        <a href="../files/src_objects_Body.js.html#l367"><code>src\objects\Body.js:367</code></a>
         </p>
 
 
@@ -2406,7 +2579,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l192"><code>src\objects\Body.js:192</code></a>
+        <a href="../files/src_objects_Body.js.html#l193"><code>src\objects\Body.js:193</code></a>
         </p>
 
 
@@ -2432,7 +2605,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l330"><code>src\objects\Body.js:330</code></a>
+        <a href="../files/src_objects_Body.js.html#l334"><code>src\objects\Body.js:334</code></a>
         </p>
 
 
@@ -2456,7 +2629,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l347"><code>src\objects\Body.js:347</code></a>
+        <a href="../files/src_objects_Body.js.html#l351"><code>src\objects\Body.js:351</code></a>
         </p>
 
 
@@ -2481,14 +2654,16 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l269"><code>src\objects\Body.js:269</code></a>
+        <a href="../files/src_objects_Body.js.html#l271"><code>src\objects\Body.js:271</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        <p>Angular velocity of the body, in world space. Think of the angular velocity as a vector, which the body rotates around. The length of this vector determines how fast (in radians per second) the body rotates.</p>
+        <p>Angular velocity of the body, in world space. Think of the angular velocity
+as a vector, which the body rotates around. The length of this vector
+determines how fast (in radians per second) the body rotates.</p>
 
     </div>
 
@@ -2507,7 +2682,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l421"><code>src\objects\Body.js:421</code></a>
+        <a href="../files/src_objects_Body.js.html#l427"><code>src\objects\Body.js:427</code></a>
         </p>
 
 
@@ -2531,7 +2706,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l370"><code>src\objects\Body.js:370</code></a>
+        <a href="../files/src_objects_Body.js.html#l374"><code>src\objects\Body.js:374</code></a>
         </p>
 
 
@@ -2556,7 +2731,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l286"><code>src\objects\Body.js:286</code></a>
+        <a href="../files/src_objects_Body.js.html#l290"><code>src\objects\Body.js:290</code></a>
         </p>
 
 
@@ -2654,7 +2829,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l397"><code>src\objects\Body.js:397</code></a>
+        <a href="../files/src_objects_Body.js.html#l403"><code>src\objects\Body.js:403</code></a>
         </p>
 
 
@@ -2679,7 +2854,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l320"><code>src\objects\Body.js:320</code></a>
+        <a href="../files/src_objects_Body.js.html#l324"><code>src\objects\Body.js:324</code></a>
         </p>
 
 
@@ -2705,7 +2880,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l147"><code>src\objects\Body.js:147</code></a>
+        <a href="../files/src_objects_Body.js.html#l148"><code>src\objects\Body.js:148</code></a>
         </p>
 
 
@@ -2730,7 +2905,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l292"><code>src\objects\Body.js:292</code></a>
+        <a href="../files/src_objects_Body.js.html#l296"><code>src\objects\Body.js:296</code></a>
         </p>
 
 
@@ -2754,7 +2929,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l280"><code>src\objects\Body.js:280</code></a>
+        <a href="../files/src_objects_Body.js.html#l284"><code>src\objects\Body.js:284</code></a>
         </p>
 
 
@@ -2778,7 +2953,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l116"><code>src\objects\Body.js:116</code></a>
+        <a href="../files/src_objects_Body.js.html#l117"><code>src\objects\Body.js:117</code></a>
         </p>
 
 
@@ -2803,7 +2978,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l245"><code>src\objects\Body.js:245</code></a>
+        <a href="../files/src_objects_Body.js.html#l247"><code>src\objects\Body.js:247</code></a>
         </p>
 
 
@@ -2827,7 +3002,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l141"><code>src\objects\Body.js:141</code></a>
+        <a href="../files/src_objects_Body.js.html#l142"><code>src\objects\Body.js:142</code></a>
         </p>
 
 
@@ -2851,7 +3026,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l110"><code>src\objects\Body.js:110</code></a>
+        <a href="../files/src_objects_Body.js.html#l111"><code>src\objects\Body.js:111</code></a>
         </p>
 
 
@@ -2876,7 +3051,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l256"><code>src\objects\Body.js:256</code></a>
+        <a href="../files/src_objects_Body.js.html#l258"><code>src\objects\Body.js:258</code></a>
         </p>
 
 
@@ -2901,7 +3076,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l298"><code>src\objects\Body.js:298</code></a>
+        <a href="../files/src_objects_Body.js.html#l302"><code>src\objects\Body.js:302</code></a>
         </p>
 
 
@@ -2925,7 +3100,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l310"><code>src\objects\Body.js:310</code></a>
+        <a href="../files/src_objects_Body.js.html#l314"><code>src\objects\Body.js:314</code></a>
         </p>
 
 
@@ -2949,7 +3124,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l303"><code>src\objects\Body.js:303</code></a>
+        <a href="../files/src_objects_Body.js.html#l307"><code>src\objects\Body.js:307</code></a>
         </p>
 
 
@@ -2973,7 +3148,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l315"><code>src\objects\Body.js:315</code></a>
+        <a href="../files/src_objects_Body.js.html#l319"><code>src\objects\Body.js:319</code></a>
         </p>
 
 
@@ -2997,7 +3172,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l163"><code>src\objects\Body.js:163</code></a>
+        <a href="../files/src_objects_Body.js.html#l164"><code>src\objects\Body.js:164</code></a>
         </p>
 
 
@@ -3022,7 +3197,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l413"><code>src\objects\Body.js:413</code></a>
+        <a href="../files/src_objects_Body.js.html#l419"><code>src\objects\Body.js:419</code></a>
         </p>
 
 
@@ -3047,7 +3222,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l175"><code>src\objects\Body.js:175</code></a>
+        <a href="../files/src_objects_Body.js.html#l176"><code>src\objects\Body.js:176</code></a>
         </p>
 
 
@@ -3071,7 +3246,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l338"><code>src\objects\Body.js:338</code></a>
+        <a href="../files/src_objects_Body.js.html#l342"><code>src\objects\Body.js:342</code></a>
         </p>
 
 
@@ -3096,7 +3271,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l156"><code>src\objects\Body.js:156</code></a>
+        <a href="../files/src_objects_Body.js.html#l157"><code>src\objects\Body.js:157</code></a>
         </p>
 
 
@@ -3121,7 +3296,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l169"><code>src\objects\Body.js:169</code></a>
+        <a href="../files/src_objects_Body.js.html#l170"><code>src\objects\Body.js:170</code></a>
         </p>
 
 
@@ -3224,7 +3399,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l105"><code>src\objects\Body.js:105</code></a>
+        <a href="../files/src_objects_Body.js.html#l106"><code>src\objects\Body.js:106</code></a>
         </p>
 
 
@@ -3248,7 +3423,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l251"><code>src\objects\Body.js:251</code></a>
+        <a href="../files/src_objects_Body.js.html#l253"><code>src\objects\Body.js:253</code></a>
         </p>
 
 
@@ -3272,7 +3447,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l238"><code>src\objects\Body.js:238</code></a>
+        <a href="../files/src_objects_Body.js.html#l239"><code>src\objects\Body.js:239</code></a>
         </p>
 
 
@@ -3298,7 +3473,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l435"><code>src\objects\Body.js:435</code></a>
+        <a href="../files/src_objects_Body.js.html#l441"><code>src\objects\Body.js:441</code></a>
         </p>
 
 
@@ -3322,7 +3497,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l208"><code>src\objects\Body.js:208</code></a>
+        <a href="../files/src_objects_Body.js.html#l209"><code>src\objects\Body.js:209</code></a>
         </p>
 
 
@@ -3348,7 +3523,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l201"><code>src\objects\Body.js:201</code></a>
+        <a href="../files/src_objects_Body.js.html#l202"><code>src\objects\Body.js:202</code></a>
         </p>
 
 
@@ -3373,7 +3548,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l219"><code>src\objects\Body.js:219</code></a>
+        <a href="../files/src_objects_Body.js.html#l220"><code>src\objects\Body.js:220</code></a>
         </p>
 
 
@@ -3400,7 +3575,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l428"><code>src\objects\Body.js:428</code></a>
+        <a href="../files/src_objects_Body.js.html#l434"><code>src\objects\Body.js:434</code></a>
         </p>
 
 
@@ -3425,7 +3600,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l405"><code>src\objects\Body.js:405</code></a>
+        <a href="../files/src_objects_Body.js.html#l411"><code>src\objects\Body.js:411</code></a>
         </p>
 
 
@@ -3450,7 +3625,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l232"><code>src\objects\Body.js:232</code></a>
+        <a href="../files/src_objects_Body.js.html#l233"><code>src\objects\Body.js:233</code></a>
         </p>
 
 
@@ -3475,7 +3650,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l182"><code>src\objects\Body.js:182</code></a>
+        <a href="../files/src_objects_Body.js.html#l183"><code>src\objects\Body.js:183</code></a>
         </p>
 
 
@@ -3500,7 +3675,7 @@ are changed.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_objects_Body.js.html#l130"><code>src\objects\Body.js:130</code></a>
+        <a href="../files/src_objects_Body.js.html#l131"><code>src\objects\Body.js:131</code></a>
         </p>
 
 
@@ -3556,7 +3731,7 @@ are changed.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_objects_Body.js.html#l388"><code>src\objects\Body.js:388</code></a>
+                            <a href="../files/src_objects_Body.js.html#l394"><code>src\objects\Body.js:394</code></a>
                             </p>
                     
                     
@@ -3610,7 +3785,7 @@ are changed.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_objects_Body.js.html#l484"><code>src\objects\Body.js:484</code></a>
+                            <a href="../files/src_objects_Body.js.html#l490"><code>src\objects\Body.js:490</code></a>
                             </p>
                     
                     
@@ -3635,7 +3810,7 @@ are changed.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_objects_Body.js.html#l476"><code>src\objects\Body.js:476</code></a>
+                            <a href="../files/src_objects_Body.js.html#l482"><code>src\objects\Body.js:482</code></a>
                             </p>
                     
                     
@@ -3660,7 +3835,7 @@ are changed.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_objects_Body.js.html#l444"><code>src\objects\Body.js:444</code></a>
+                            <a href="../files/src_objects_Body.js.html#l450"><code>src\objects\Body.js:450</code></a>
                             </p>
                     
                     

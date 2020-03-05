@@ -3488,7 +3488,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 214,
+            "line": 215,
             "itemtype": "method",
             "name": "intersectBodies",
             "params": [
@@ -3508,7 +3508,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 230,
+            "line": 231,
             "description": "Updates the _direction vector.",
             "access": "private",
             "tagname": "",
@@ -3518,7 +3518,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 240,
+            "line": 241,
             "itemtype": "method",
             "name": "intersectShape",
             "access": "private",
@@ -3549,7 +3549,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 274,
+            "line": 275,
             "itemtype": "method",
             "name": "intersectBox",
             "access": "private",
@@ -3580,7 +3580,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 299,
+            "line": 300,
             "itemtype": "method",
             "name": "intersectPlane",
             "access": "private",
@@ -3611,7 +3611,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 357,
+            "line": 358,
             "description": "Get the world AABB of the ray.",
             "itemtype": "method",
             "name": "getAABB",
@@ -3626,7 +3626,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 381,
+            "line": 382,
             "itemtype": "method",
             "name": "intersectHeightfield",
             "access": "private",
@@ -3657,7 +3657,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 481,
+            "line": 482,
             "itemtype": "method",
             "name": "intersectSphere",
             "access": "private",
@@ -3688,7 +3688,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 573,
+            "line": 574,
             "itemtype": "method",
             "name": "intersectConvex",
             "access": "private",
@@ -3733,7 +3733,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 698,
+            "line": 699,
             "itemtype": "method",
             "name": "intersectTrimesh",
             "access": "private",
@@ -3774,7 +3774,7 @@
         },
         {
             "file": "src\\collision\\Ray.js",
-            "line": 837,
+            "line": 838,
             "itemtype": "method",
             "name": "reportIntersection",
             "access": "private",
@@ -6349,7 +6349,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 105,
+            "line": 106,
             "itemtype": "property",
             "name": "previousPosition",
             "type": "Vec3",
@@ -6357,7 +6357,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 110,
+            "line": 111,
             "description": "Interpolated position of the body.",
             "itemtype": "property",
             "name": "interpolatedPosition",
@@ -6366,7 +6366,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 116,
+            "line": 117,
             "description": "Initial position of the body",
             "itemtype": "property",
             "name": "initPosition",
@@ -6375,7 +6375,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 130,
+            "line": 131,
             "description": "World space velocity of the body.",
             "itemtype": "property",
             "name": "velocity",
@@ -6384,7 +6384,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 141,
+            "line": 142,
             "itemtype": "property",
             "name": "initVelocity",
             "type": "{Vec3}",
@@ -6392,7 +6392,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 147,
+            "line": 148,
             "description": "Linear force on the body in world space.",
             "itemtype": "property",
             "name": "force",
@@ -6401,7 +6401,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 156,
+            "line": 157,
             "itemtype": "property",
             "name": "mass",
             "type": "{Number}",
@@ -6410,7 +6410,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 163,
+            "line": 164,
             "itemtype": "property",
             "name": "invMass",
             "type": "{Number}",
@@ -6418,7 +6418,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 169,
+            "line": 170,
             "itemtype": "property",
             "name": "material",
             "type": "{Material}",
@@ -6426,7 +6426,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 175,
+            "line": 176,
             "itemtype": "property",
             "name": "linearDamping",
             "type": "{Number}",
@@ -6434,7 +6434,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 182,
+            "line": 183,
             "description": "One of: Body.DYNAMIC, Body.STATIC and Body.KINEMATIC.",
             "itemtype": "property",
             "name": "type",
@@ -6443,7 +6443,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 192,
+            "line": 193,
             "description": "If true, the body will automatically fall to sleep.",
             "itemtype": "property",
             "name": "allowSleep",
@@ -6453,7 +6453,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 201,
+            "line": 202,
             "description": "Current sleep state.",
             "itemtype": "property",
             "name": "sleepState",
@@ -6462,7 +6462,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 208,
+            "line": 209,
             "description": "If the speed (the norm of the velocity) is smaller than this value, the body is considered sleepy.",
             "itemtype": "property",
             "name": "sleepSpeedLimit",
@@ -6472,7 +6472,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 219,
+            "line": 220,
             "description": "If the body has been sleepy for this sleepTimeLimit seconds, it is considered sleeping.",
             "itemtype": "property",
             "name": "sleepTimeLimit",
@@ -6482,7 +6482,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 232,
+            "line": 233,
             "description": "World space rotational force on the body, around center of mass.",
             "itemtype": "property",
             "name": "torque",
@@ -6491,7 +6491,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 238,
+            "line": 239,
             "description": "World space orientation of the body.",
             "itemtype": "property",
             "name": "quaternion",
@@ -6500,7 +6500,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 245,
+            "line": 247,
             "itemtype": "property",
             "name": "initQuaternion",
             "type": "{Quaternion}",
@@ -6508,7 +6508,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 251,
+            "line": 253,
             "itemtype": "property",
             "name": "previousQuaternion",
             "type": "Quaternion",
@@ -6516,7 +6516,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 256,
+            "line": 258,
             "description": "Interpolated orientation of the body.",
             "itemtype": "property",
             "name": "interpolatedQuaternion",
@@ -6525,8 +6525,8 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 269,
-            "description": "Angular velocity of the body, in world space. Think of the angular velocity as a vector, which the body rotates around. The length of this vector determines how fast (in radians per second) the body rotates.",
+            "line": 271,
+            "description": "Angular velocity of the body, in world space. Think of the angular velocity\nas a vector, which the body rotates around. The length of this vector\ndetermines how fast (in radians per second) the body rotates.",
             "itemtype": "property",
             "name": "angularVelocity",
             "type": "{Vec3}",
@@ -6534,7 +6534,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 280,
+            "line": 284,
             "itemtype": "property",
             "name": "initAngularVelocity",
             "type": "{Vec3}",
@@ -6542,7 +6542,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 286,
+            "line": 290,
             "itemtype": "property",
             "name": "children",
             "type": "{Array<Shape|Group>}",
@@ -6550,7 +6550,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 292,
+            "line": 296,
             "itemtype": "property",
             "name": "inertia",
             "type": "{Vec3}",
@@ -6558,7 +6558,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 298,
+            "line": 302,
             "itemtype": "property",
             "name": "invInertia",
             "type": "Vec3",
@@ -6566,7 +6566,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 303,
+            "line": 307,
             "itemtype": "property",
             "name": "invInertiaWorld",
             "type": "Mat3",
@@ -6574,7 +6574,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 310,
+            "line": 314,
             "itemtype": "property",
             "name": "invInertiaSolve",
             "type": "Vec3",
@@ -6582,7 +6582,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 315,
+            "line": 319,
             "itemtype": "property",
             "name": "invInertiaWorldSolve",
             "type": "Mat3",
@@ -6590,7 +6590,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 320,
+            "line": 324,
             "description": "Set to true if you don't want the body to rotate. Make sure to run .updateMassProperties() after changing this.",
             "itemtype": "property",
             "name": "fixedRotation",
@@ -6600,7 +6600,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 330,
+            "line": 334,
             "itemtype": "property",
             "name": "angularDamping",
             "type": "Number",
@@ -6608,7 +6608,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 338,
+            "line": 342,
             "description": "Use this property to limit the motion along any world axis. (1,1,1) will allow motion along all axes while (0,0,0) allows none.",
             "itemtype": "property",
             "name": "linearFactor",
@@ -6617,7 +6617,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 347,
+            "line": 351,
             "description": "Use this property to limit the rotational motion along any world axis. (1,1,1) will allow rotation along all axes while (0,0,0) allows none.",
             "itemtype": "property",
             "name": "angularFactor",
@@ -6626,7 +6626,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 356,
+            "line": 360,
             "description": "World space bounding box of the body and its shapes.",
             "itemtype": "property",
             "name": "aabb",
@@ -6635,7 +6635,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 363,
+            "line": 367,
             "description": "Indicates if the AABB needs to be updated before use.",
             "itemtype": "property",
             "name": "aabbNeedsUpdate",
@@ -6644,7 +6644,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 370,
+            "line": 374,
             "description": "Total bounding radius of the Body including its shapes, relative to body.position.",
             "itemtype": "property",
             "name": "boundingRadius",
@@ -6653,7 +6653,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 388,
+            "line": 394,
             "description": "Dispatched after two bodies collide. This event is dispatched on each\nof the two bodies involved in the collision.",
             "itemtype": "event",
             "name": "collide",
@@ -6673,7 +6673,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 397,
+            "line": 403,
             "description": "A dynamic body is fully simulated. Can be moved manually by the user, but normally they move according to forces. A dynamic body can collide with all body types. A dynamic body always has finite, non-zero mass.",
             "static": 1,
             "itemtype": "property",
@@ -6683,7 +6683,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 405,
+            "line": 411,
             "description": "A static body does not move during simulation and behaves as if it has infinite mass. Static bodies can be moved manually by setting the position of the body. The velocity of a static body is always zero. Static bodies do not collide with other static or kinematic bodies.",
             "static": 1,
             "itemtype": "property",
@@ -6693,7 +6693,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 413,
+            "line": 419,
             "description": "A kinematic body moves under simulation according to its velocity. They do not respond to forces. They can be moved manually, but normally a kinematic body is moved by setting its velocity. A kinematic body behaves as if it has infinite mass. Kinematic bodies do not collide with other static or kinematic bodies.",
             "static": 1,
             "itemtype": "property",
@@ -6703,7 +6703,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 421,
+            "line": 427,
             "static": 1,
             "itemtype": "property",
             "name": "AWAKE",
@@ -6712,7 +6712,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 428,
+            "line": 434,
             "static": 1,
             "itemtype": "property",
             "name": "SLEEPY",
@@ -6721,7 +6721,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 435,
+            "line": 441,
             "static": 1,
             "itemtype": "property",
             "name": "SLEEPING",
@@ -6730,7 +6730,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 444,
+            "line": 450,
             "description": "Dispatched after a sleeping body has woken up.",
             "itemtype": "event",
             "name": "wakeup",
@@ -6738,7 +6738,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 452,
+            "line": 458,
             "description": "Wake the body up.",
             "itemtype": "method",
             "name": "wakeUp",
@@ -6746,7 +6746,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 465,
+            "line": 471,
             "description": "Force body sleep",
             "itemtype": "method",
             "name": "sleep",
@@ -6754,7 +6754,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 476,
+            "line": 482,
             "description": "Dispatched after a body has gone in to the sleepy state.",
             "itemtype": "event",
             "name": "sleepy",
@@ -6762,7 +6762,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 484,
+            "line": 490,
             "description": "Dispatched after a body has fallen asleep.",
             "itemtype": "event",
             "name": "sleep",
@@ -6770,7 +6770,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 492,
+            "line": 498,
             "description": "Called every timestep to update internal sleep timer and change sleep state if needed.",
             "itemtype": "method",
             "name": "sleepTick",
@@ -6785,7 +6785,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 518,
+            "line": 524,
             "description": "If the body is sleeping, it should be immovable / have infinite mass during solve. We solve it by having a separate \"solve mass\".",
             "itemtype": "method",
             "name": "updateSolveMassProperties",
@@ -6793,7 +6793,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 534,
+            "line": 540,
             "description": "Convert a world point to local body frame.",
             "itemtype": "method",
             "name": "pointToLocalFrame",
@@ -6817,7 +6817,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 548,
+            "line": 554,
             "description": "Convert a world vector to local body frame.",
             "itemtype": "method",
             "name": "vectorToLocalFrame",
@@ -6841,7 +6841,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 561,
+            "line": 567,
             "description": "Convert a local body point to world frame.",
             "itemtype": "method",
             "name": "pointToWorldFrame",
@@ -6865,7 +6865,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 575,
+            "line": 581,
             "description": "Convert a local body point to world frame.",
             "itemtype": "method",
             "name": "vectorToWorldFrame",
@@ -6889,7 +6889,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 591,
+            "line": 597,
             "description": "Add a shape to the body with a local offset and orientation.",
             "itemtype": "method",
             "name": "addShape",
@@ -6920,7 +6920,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 616,
+            "line": 622,
             "description": "Re,pves a shape from the body.",
             "itemtype": "method",
             "name": "addShape",
@@ -6939,7 +6939,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 626,
+            "line": 632,
             "description": "Add a group or shape to the body.",
             "itemtype": "method",
             "name": "add",
@@ -6958,7 +6958,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 642,
+            "line": 648,
             "description": "Removes a group or shape from the body.",
             "itemtype": "method",
             "name": "remove",
@@ -6977,7 +6977,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 662,
+            "line": 668,
             "description": "Update the bounding radius of the body. Should be done if any of the children\nare changed.",
             "itemtype": "method",
             "name": "updateBoundingRadius",
@@ -6985,7 +6985,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 687,
+            "line": 693,
             "description": "Updates the .aabb",
             "itemtype": "method",
             "name": "computeAABB",
@@ -6996,7 +6996,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 734,
+            "line": 740,
             "description": "Update .inertiaWorld and .invInertiaWorld",
             "itemtype": "method",
             "name": "updateInertiaWorld",
@@ -7004,7 +7004,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 757,
+            "line": 763,
             "description": "Apply force to a world point. This could for example be a point on the Body surface. Applying force this way will add to Body.force and Body.torque.",
             "itemtype": "method",
             "name": "applyForce",
@@ -7024,7 +7024,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 782,
+            "line": 788,
             "description": "Apply force to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalForce",
@@ -7044,7 +7044,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 805,
+            "line": 811,
             "description": "Apply impulse to a world point. This could for example be a point on the Body surface. An impulse is a force added to a body during a short period of time (impulse = force * time). Impulses will be added to Body.velocity and Body.angularVelocity.",
             "itemtype": "method",
             "name": "applyImpulse",
@@ -7064,7 +7064,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 845,
+            "line": 851,
             "description": "Apply locally-defined impulse to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalImpulse",
@@ -7084,7 +7084,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 870,
+            "line": 876,
             "description": "Should be called whenever you change the body shape or mass.",
             "itemtype": "method",
             "name": "updateMassProperties",
@@ -7092,7 +7092,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 898,
+            "line": 904,
             "description": "Get world velocity of a point in the body.",
             "itemtype": "method",
             "name": "getVelocityAtWorldPoint",
@@ -7116,7 +7116,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 918,
+            "line": 924,
             "description": "Move the body forward in time.",
             "params": [
                 {
@@ -7133,6 +7133,55 @@
                     "name": "quatNormalizeFast",
                     "description": "If the quaternion should be normalized using \"fast\" quaternion normalization",
                     "type": "Boolean"
+                }
+            ],
+            "class": "Body"
+        },
+        {
+            "file": "src\\objects\\Body.js",
+            "line": 988,
+            "description": "Gets all \"components\", aka Groups/Bodies, that are children of the body.",
+            "itemtype": "method",
+            "name": "getAllComponents",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Body"
+        },
+        {
+            "file": "src\\objects\\Body.js",
+            "line": 1004,
+            "description": "Gets all first-level shapes of the body.",
+            "itemtype": "method",
+            "name": "getShapes",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Body"
+        },
+        {
+            "file": "src\\objects\\Body.js",
+            "line": 1013,
+            "description": "Calculates the world quaternion and position of the given shape.",
+            "itemtype": "method",
+            "name": "getShapePositionAndRotation",
+            "params": [
+                {
+                    "name": "shape",
+                    "description": "",
+                    "type": "Shape"
+                },
+                {
+                    "name": "targetQuaternion",
+                    "description": "",
+                    "type": "Quaternion"
+                },
+                {
+                    "name": "targetPosition",
+                    "description": "",
+                    "type": "Vec3"
                 }
             ],
             "class": "Body"
@@ -8719,6 +8768,22 @@
             "file": "src\\shapes\\Group.js",
             "line": 45,
             "itemtype": "property",
+            "name": "worldPosition",
+            "type": "Vec3",
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 50,
+            "itemtype": "property",
+            "name": "worldQuaternion",
+            "type": "Quaternion",
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 55,
+            "itemtype": "property",
             "name": "mass",
             "type": "{Number}",
             "default": "0",
@@ -8726,7 +8791,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 53,
+            "line": 63,
             "description": "The local bounding sphere radius of this group.",
             "itemtype": "property",
             "name": "boundingSphereRadius",
@@ -8735,7 +8800,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 59,
+            "line": 69,
             "description": "World space bounding box of the group and its children.",
             "itemtype": "property",
             "name": "aabb",
@@ -8744,7 +8809,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 67,
+            "line": 80,
             "description": "Shim to better match Shape.",
             "todo": [
                 ": Remove this."
@@ -8753,7 +8818,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 75,
+            "line": 88,
             "description": "Shim to better match Shape.",
             "todo": [
                 ": Remove this."
@@ -8762,7 +8827,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 83,
+            "line": 96,
             "description": "Sets the parent of the group.",
             "params": [
                 {
@@ -8777,7 +8842,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 95,
+            "line": 108,
             "description": "Adds a child shape or group to this group. Only groups and shapes can be\nchildren, NOT bodies.",
             "params": [
                 {
@@ -8792,7 +8857,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 106,
+            "line": 119,
             "description": "Removes a child from the group.",
             "params": [
                 {
@@ -8807,7 +8872,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 118,
+            "line": 131,
             "description": "Computes the bounding sphere radius. The result is stored in the property\n.boundingSphereRadius.",
             "itemtype": "method",
             "name": "updateBoundingSphereRadius",
@@ -8815,7 +8880,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 142,
+            "line": 155,
             "description": "Computes the bounding box for the shape and stores the result in min and max.",
             "todo": [
                 "Calculate world position and world rotation within group/shape."
@@ -8838,6 +8903,63 @@
                 },
                 {
                     "name": "max",
+                    "description": "",
+                    "type": "Vec3"
+                }
+            ],
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 199,
+            "description": "Gets all \"components\", aka Groups/Bodies, that are children of the group.",
+            "itemtype": "method",
+            "name": "getAllComponents",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 215,
+            "description": "Gets all first-level shapes of the group.",
+            "itemtype": "method",
+            "name": "getShapes",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 224,
+            "description": "Calculates the world position and rotation of the group.",
+            "itemtype": "method",
+            "name": "calculateWorldPositionAndRotation",
+            "class": "Group"
+        },
+        {
+            "file": "src\\shapes\\Group.js",
+            "line": 242,
+            "description": "Calculates the world quaternion and position of the given shape.",
+            "itemtype": "method",
+            "name": "getShapePositionAndRotation",
+            "params": [
+                {
+                    "name": "shape",
+                    "description": "",
+                    "type": "Shape"
+                },
+                {
+                    "name": "targetQuaternion",
+                    "description": "",
+                    "type": "Quaternion"
+                },
+                {
+                    "name": "targetPosition",
                     "description": "",
                     "type": "Vec3"
                 }
@@ -9251,7 +9373,7 @@
         },
         {
             "file": "src\\shapes\\Shape.js",
-            "line": 88,
+            "line": 90,
             "description": "Computes the bounding sphere radius. The result is stored in the property .boundingSphereRadius",
             "itemtype": "method",
             "name": "updateBoundingSphereRadius",
@@ -9259,7 +9381,7 @@
         },
         {
             "file": "src\\shapes\\Shape.js",
-            "line": 97,
+            "line": 99,
             "description": "Computes the bounding box for the shape and stores the result in min and max.",
             "params": [
                 {
@@ -9287,7 +9409,7 @@
         },
         {
             "file": "src\\shapes\\Shape.js",
-            "line": 108,
+            "line": 110,
             "description": "Get the volume of this shape",
             "itemtype": "method",
             "name": "volume",
@@ -9299,7 +9421,7 @@
         },
         {
             "file": "src\\shapes\\Shape.js",
-            "line": 117,
+            "line": 119,
             "description": "Calculates the inertia in the local frame for this shape.",
             "itemtype": "method",
             "name": "calculateLocalInertia",
@@ -9322,7 +9444,7 @@
         },
         {
             "file": "src\\shapes\\Shape.js",
-            "line": 128,
+            "line": 130,
             "description": "Sets the parent of the shape.",
             "params": [
                 {
@@ -9337,7 +9459,7 @@
         },
         {
             "file": "src\\shapes\\Shape.js",
-            "line": 139,
+            "line": 141,
             "description": "The available shape types.",
             "static": 1,
             "itemtype": "property",
@@ -11831,19 +11953,19 @@
         },
         {
             "message": "Missing item type\nMove the body forward in time.",
-            "line": " src\\objects\\Body.js:918"
+            "line": " src\\objects\\Body.js:924"
         },
         {
             "message": "Missing item type\nShim to better match Shape.",
-            "line": " src\\shapes\\Group.js:67"
+            "line": " src\\shapes\\Group.js:80"
         },
         {
             "message": "Missing item type\nShim to better match Shape.",
-            "line": " src\\shapes\\Group.js:75"
+            "line": " src\\shapes\\Group.js:88"
         },
         {
             "message": "Missing item type\nComputes the bounding box for the shape and stores the result in min and max.",
-            "line": " src\\shapes\\Group.js:142"
+            "line": " src\\shapes\\Group.js:155"
         },
         {
             "message": "Missing item type\nGet an AABB of a square in the heightfield",
@@ -11859,7 +11981,7 @@
         },
         {
             "message": "Missing item type\nComputes the bounding box for the shape and stores the result in min and max.",
-            "line": " src\\shapes\\Shape.js:97"
+            "line": " src\\shapes\\Shape.js:99"
         }
     ]
 }

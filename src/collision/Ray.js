@@ -192,21 +192,22 @@ Ray.prototype.intersectBody = function(body, result) {
   var xi = intersectBody_xi;
   var qi = intersectBody_qi;
 
-  for (var i = 0, N = body.children.length; i < N; i++) {
-    var shape = body.children[i];
+  const components = body.getAllComponents();
+  for (var i = 0, C = components.length; i < C; i++) {
+    const component = components[i];
+    const shapes = component.getShapes();
+    for (var j = 0, N = shapes.length; j < N; j++) {
+      const shape = shapes[j];
 
-    if (checkCollisionResponse && !shape.collisionResponse) {
-      continue; // Skip
-    }
+      if (checkCollisionResponse && !shape.collisionResponse) {
+        continue; // Skip
+      }
+      component.getShapePositionAndRotation(shape, qi, xi);
+      this.intersectShape(shape, qi, xi, body);
 
-    body.quaternion.mult(shape.orientation, qi);
-    body.quaternion.vmult(shape.offset, xi);
-    xi.vadd(body.position, xi);
-
-    this.intersectShape(shape, qi, xi, body);
-
-    if (this.result._shouldStop) {
-      break;
+      if (this.result._shouldStop) {
+        return;
+      }
     }
   }
 };

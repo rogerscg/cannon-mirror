@@ -82,6 +82,8 @@ function Shape(options) {
    * @property {Body|Group} parent
    */
   this.parent = null;
+
+  this.isShape = true;
 }
 Shape.prototype.constructor = Shape;
 

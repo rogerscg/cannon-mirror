@@ -1,4 +1,4 @@
-// Thu, 05 Mar 2020 04:41:25 GMT
+// Thu, 05 Mar 2020 05:49:23 GMT
 
 /*
  * Copyright (c) 2015 cannon.js Authors
@@ -1400,21 +1400,22 @@ Ray.prototype.intersectBody = function(body, result) {
   var xi = intersectBody_xi;
   var qi = intersectBody_qi;
 
-  for (var i = 0, N = body.children.length; i < N; i++) {
-    var shape = body.children[i];
+  const components = body.getAllComponents();
+  for (var i = 0, C = components.length; i < C; i++) {
+    const component = components[i];
+    const shapes = component.getShapes();
+    for (var j = 0, N = shapes.length; j < N; j++) {
+      const shape = shapes[j];
 
-    if (checkCollisionResponse && !shape.collisionResponse) {
-      continue; // Skip
-    }
+      if (checkCollisionResponse && !shape.collisionResponse) {
+        continue; // Skip
+      }
+      component.getShapePositionAndRotation(shape, qi, xi);
+      this.intersectShape(shape, qi, xi, body);
 
-    body.quaternion.mult(shape.orientation, qi);
-    body.quaternion.vmult(shape.offset, xi);
-    xi.vadd(body.position, xi);
-
-    this.intersectShape(shape, qi, xi, body);
-
-    if (this.result._shouldStop) {
-      break;
+      if (this.result._shouldStop) {
+        return;
+      }
     }
   }
 };
@@ -5590,6 +5591,7 @@ function Body(options) {
    * @type {Vec3}
    */
   this.position = new Vec3();
+  this.worldPosition = this.position;
 
   /**
    * @property {Vec3} previousPosition
@@ -5730,6 +5732,7 @@ function Body(options) {
    * @type {Quaternion}
    */
   this.quaternion = new Quaternion();
+  this.worldQuaternion = this.quaternion;
 
   /**
    * @property initQuaternion
@@ -5756,7 +5759,9 @@ function Body(options) {
   }
 
   /**
-   * Angular velocity of the body, in world space. Think of the angular velocity as a vector, which the body rotates around. The length of this vector determines how fast (in radians per second) the body rotates.
+   * Angular velocity of the body, in world space. Think of the angular velocity
+   * as a vector, which the body rotates around. The length of this vector
+   * determines how fast (in radians per second) the body rotates.
    * @property angularVelocity
    * @type {Vec3}
    */
@@ -5864,6 +5869,8 @@ function Body(options) {
   this.boundingRadius = 0;
 
   this.wlambda = new Vec3();
+
+  this.isComponent = true;
 
   if (options.shape) {
     this.addShape(options.shape);
@@ -6466,6 +6473,48 @@ Body.prototype.integrate = function(dt, quatNormalize, quatNormalizeFast) {
 
   // Update world inertia
   this.updateInertiaWorld();
+};
+
+/**
+ * Gets all "components", aka Groups/Bodies, that are children of the body.
+ * @method getAllComponents
+ * @return {Array}
+ */
+Body.prototype.getAllComponents = function() {
+  let components = [this];
+  this.children.forEach((child) => {
+    if (child.isComponent) {
+      components.push(child);
+      components = comments.concat(child.getAllComponents());
+    }
+  });
+  return components;
+};
+
+/**
+ * Gets all first-level shapes of the body.
+ * @method getShapes
+ * @return {Array}
+ */
+Body.prototype.getShapes = function() {
+  return this.children.filter((child) => child.isShape);
+};
+
+/**
+ * Calculates the world quaternion and position of the given shape.
+ * @method getShapePositionAndRotation
+ * @param {Shape} shape
+ * @param {Quaternion} targetQuaternion
+ * @param {Vec3} targetPosition
+ */
+Body.prototype.getShapePositionAndRotation = function(
+  shape,
+  targetQuaternion,
+  targetPosition
+) {
+  this.quaternion.mult(shape.orientation, targetQuaternion);
+  this.quaternion.vmult(shape.offset, targetPosition);
+  targetPosition.vadd(this.position, targetPosition);
 };
 
 },{"../collision/AABB":3,"../material/Material":26,"../math/Mat3":28,"../math/Quaternion":29,"../math/Vec3":31,"../shapes/Box":38,"../shapes/Shape":45,"../utils/EventTarget":51}],33:[function(require,module,exports){
@@ -9379,6 +9428,16 @@ class Group {
     this.quaternion = new Quaternion();
 
     /**
+     * @property {Vec3} worldPosition
+     */
+    this.worldPosition = new Vec3();
+
+    /**
+     * @property {Quaternion} worldQuaternion
+     */
+    this.worldQuaternion = new Quaternion();
+
+    /**
      * @property mass
      * @type {Number}
      * @default 0
@@ -9398,6 +9457,9 @@ class Group {
      * @type {AABB}
      */
     this.aabb = new AABB();
+
+    this.isComponent = true;
+    this.isGroup = true;
   }
 
   /**
@@ -9517,6 +9579,63 @@ class Group {
     }
     min.copy(aabb.lowerBound);
     max.copy(aabb.upperBound);
+  }
+
+  /**
+   * Gets all "components", aka Groups/Bodies, that are children of the group.
+   * @method getAllComponents
+   * @return {Array}
+   */
+  getAllComponents() {
+    let components = [this];
+    this.children.forEach((child) => {
+      if (child.isComponent) {
+        components.push(child);
+        components = comments.concat(child.getAllComponents());
+      }
+    });
+    return components;
+  }
+
+  /**
+   * Gets all first-level shapes of the group.
+   * @method getShapes
+   * @return {Array}
+   */
+  getShapes() {
+    return this.children.filter((child) => child.isShape);
+  }
+
+  /**
+   * Calculates the world position and rotation of the group.
+   * @method calculateWorldPositionAndRotation
+   */
+  calculateWorldPositionAndRotation() {
+    if (!this.parent) {
+      this.worldPosition.copy(this.position);
+      this.worldQuaternion.copy(this.quaternion);
+      return;
+    }
+    if (this.parent.isGroup) {
+      this.parent.calculateWorldPositionAndRotation();
+    }
+    this.parent.worldQuaternion.mult(this.quaternion, this.worldQuaternion);
+    this.parent.worldQuaternion.vmult(this.position, this.worldPosition);
+    this.worldPosition.vadd(this.parent.worldPosition, this.worldPosition);
+  }
+
+  /**
+   * Calculates the world quaternion and position of the given shape.
+   * @method getShapePositionAndRotation
+   * @param {Shape} shape
+   * @param {Quaternion} targetQuaternion
+   * @param {Vec3} targetPosition
+   */
+  getShapePositionAndRotation(shape, targetQuaternion, targetPosition) {
+    this.calculateWorldPositionAndRotation();
+    this.worldQuaternion.mult(shape.orientation, targetQuaternion);
+    this.worldQuaternion.vmult(shape.offset, targetPosition);
+    targetPosition.vadd(this.worldPosition, targetPosition);
   }
 }
 
@@ -10406,6 +10525,8 @@ function Shape(options) {
    * @property {Body|Group} parent
    */
   this.parent = null;
+
+  this.isShape = true;
 }
 Shape.prototype.constructor = Shape;
 

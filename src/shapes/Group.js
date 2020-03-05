@@ -43,6 +43,16 @@ class Group {
     this.quaternion = new Quaternion();
 
     /**
+     * @property {Vec3} worldPosition
+     */
+    this.worldPosition = new Vec3();
+
+    /**
+     * @property {Quaternion} worldQuaternion
+     */
+    this.worldQuaternion = new Quaternion();
+
+    /**
      * @property mass
      * @type {Number}
      * @default 0
@@ -62,6 +72,9 @@ class Group {
      * @type {AABB}
      */
     this.aabb = new AABB();
+
+    this.isComponent = true;
+    this.isGroup = true;
   }
 
   /**
@@ -181,6 +194,63 @@ class Group {
     }
     min.copy(aabb.lowerBound);
     max.copy(aabb.upperBound);
+  }
+
+  /**
+   * Gets all "components", aka Groups/Bodies, that are children of the group.
+   * @method getAllComponents
+   * @return {Array}
+   */
+  getAllComponents() {
+    let components = [this];
+    this.children.forEach((child) => {
+      if (child.isComponent) {
+        components.push(child);
+        components = comments.concat(child.getAllComponents());
+      }
+    });
+    return components;
+  }
+
+  /**
+   * Gets all first-level shapes of the group.
+   * @method getShapes
+   * @return {Array}
+   */
+  getShapes() {
+    return this.children.filter((child) => child.isShape);
+  }
+
+  /**
+   * Calculates the world position and rotation of the group.
+   * @method calculateWorldPositionAndRotation
+   */
+  calculateWorldPositionAndRotation() {
+    if (!this.parent) {
+      this.worldPosition.copy(this.position);
+      this.worldQuaternion.copy(this.quaternion);
+      return;
+    }
+    if (this.parent.isGroup) {
+      this.parent.calculateWorldPositionAndRotation();
+    }
+    this.parent.worldQuaternion.mult(this.quaternion, this.worldQuaternion);
+    this.parent.worldQuaternion.vmult(this.position, this.worldPosition);
+    this.worldPosition.vadd(this.parent.worldPosition, this.worldPosition);
+  }
+
+  /**
+   * Calculates the world quaternion and position of the given shape.
+   * @method getShapePositionAndRotation
+   * @param {Shape} shape
+   * @param {Quaternion} targetQuaternion
+   * @param {Vec3} targetPosition
+   */
+  getShapePositionAndRotation(shape, targetQuaternion, targetPosition) {
+    this.calculateWorldPositionAndRotation();
+    this.worldQuaternion.mult(shape.orientation, targetQuaternion);
+    this.worldQuaternion.vmult(shape.offset, targetPosition);
+    targetPosition.vadd(this.worldPosition, targetPosition);
   }
 }
 

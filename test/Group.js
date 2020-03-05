@@ -93,5 +93,47 @@ module.exports = {
 
       test.done();
     }
+  },
+
+  calculateWorldPositionAndRotation: {
+    root: function(test) {
+      var group = new Group();
+      group.position.y = 1;
+      group.calculateWorldPositionAndRotation();
+      const expectedPosition = new Vec3(0, 1, 0);
+
+      test.deepEqual(group.worldPosition, expectedPosition);
+      test.done();
+    },
+
+    singleParent: function(test) {
+      var group = new Group();
+      var parent = new Group();
+      parent.add(group);
+      parent.position.y = 1;
+      group.position.y = 1;
+      group.calculateWorldPositionAndRotation();
+      const expectedPosition = new Vec3(0, 2, 0);
+
+      test.deepEqual(group.worldPosition, expectedPosition);
+      test.done();
+    },
+
+    rotatedParent: function(test) {
+      var group = new Group();
+      var parent = new Group();
+      parent.add(group);
+      parent.position.y = 1;
+      parent.quaternion.setFromEuler(Math.PI / 2, 0, 0);
+      group.position.y = 1;
+      group.calculateWorldPositionAndRotation();
+      const expectedPosition = new Vec3(0, 1, 1);
+
+      test.ok(
+        group.worldPosition.almostEquals(expectedPosition),
+        `${group.worldPosition} should equal ${expectedPosition}`
+      );
+      test.done();
+    }
   }
 };

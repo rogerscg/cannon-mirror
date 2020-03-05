@@ -101,6 +101,7 @@ function Body(options) {
    * @type {Vec3}
    */
   this.position = new Vec3();
+  this.worldPosition = this.position;
 
   /**
    * @property {Vec3} previousPosition
@@ -241,6 +242,7 @@ function Body(options) {
    * @type {Quaternion}
    */
   this.quaternion = new Quaternion();
+  this.worldQuaternion = this.quaternion;
 
   /**
    * @property initQuaternion
@@ -267,7 +269,9 @@ function Body(options) {
   }
 
   /**
-   * Angular velocity of the body, in world space. Think of the angular velocity as a vector, which the body rotates around. The length of this vector determines how fast (in radians per second) the body rotates.
+   * Angular velocity of the body, in world space. Think of the angular velocity
+   * as a vector, which the body rotates around. The length of this vector
+   * determines how fast (in radians per second) the body rotates.
    * @property angularVelocity
    * @type {Vec3}
    */
@@ -375,6 +379,8 @@ function Body(options) {
   this.boundingRadius = 0;
 
   this.wlambda = new Vec3();
+
+  this.isComponent = true;
 
   if (options.shape) {
     this.addShape(options.shape);
@@ -977,4 +983,46 @@ Body.prototype.integrate = function(dt, quatNormalize, quatNormalizeFast) {
 
   // Update world inertia
   this.updateInertiaWorld();
+};
+
+/**
+ * Gets all "components", aka Groups/Bodies, that are children of the body.
+ * @method getAllComponents
+ * @return {Array}
+ */
+Body.prototype.getAllComponents = function() {
+  let components = [this];
+  this.children.forEach((child) => {
+    if (child.isComponent) {
+      components.push(child);
+      components = comments.concat(child.getAllComponents());
+    }
+  });
+  return components;
+};
+
+/**
+ * Gets all first-level shapes of the body.
+ * @method getShapes
+ * @return {Array}
+ */
+Body.prototype.getShapes = function() {
+  return this.children.filter((child) => child.isShape);
+};
+
+/**
+ * Calculates the world quaternion and position of the given shape.
+ * @method getShapePositionAndRotation
+ * @param {Shape} shape
+ * @param {Quaternion} targetQuaternion
+ * @param {Vec3} targetPosition
+ */
+Body.prototype.getShapePositionAndRotation = function(
+  shape,
+  targetQuaternion,
+  targetPosition
+) {
+  this.quaternion.mult(shape.orientation, targetQuaternion);
+  this.quaternion.vmult(shape.offset, targetPosition);
+  targetPosition.vadd(this.position, targetPosition);
 };
