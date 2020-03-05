@@ -6308,14 +6308,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           orientation.copy(_orientation);
         }
 
-        this.children.push(shape);
         shape.offset = offset;
         shape.orientation = orientation;
-        this.updateMassProperties();
-        this.updateBoundingRadius();
-        this.aabbNeedsUpdate = true;
-        shape.body = this;
+        this.add(shape);
         return this;
+      };
+      /**
+       * Re,pves a shape from the body.
+       * @method addShape
+       * @param {Shape} shape
+       * @return {Body} The body object, for chainability.
+       */
+
+
+      Body.prototype.removeShape = function (shape) {
+        return this.remove(shape);
       };
       /**
        * Add a group or shape to the body.
@@ -6327,10 +6334,32 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       Body.prototype.add = function (child) {
         this.children.push(child);
+        child.setParent(this);
         this.updateMassProperties();
         this.updateBoundingRadius();
-        this.aabbNeedsUpdate = true; // @todo: Set parent of shape/group.
+        this.aabbNeedsUpdate = true;
+        return this;
+      };
+      /**
+       * Removes a group or shape from the body.
+       * @method remove
+       * @param {Group|Shape} child
+       * @return {Body} The body object, for chainability.
+       */
 
+
+      Body.prototype.remove = function (child) {
+        var index = this.children.indexOf(child);
+
+        if (index == -1) {
+          return this;
+        }
+
+        this.children.splice(index, 1);
+        child.parent = null;
+        this.updateMassProperties();
+        this.updateBoundingRadius();
+        this.aabbNeedsUpdate = true;
         return this;
       };
       /**
@@ -9612,8 +9641,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, {
           key: "add",
           value: function add(child) {
-            // TODO: Set parent as well.
-            //child.setParent(this);
+            child.setParent(this);
             this.children.add(child);
           }
           /**
@@ -9626,7 +9654,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           key: "remove",
           value: function remove(child) {
             if (this.children.has(child)) {
-              this.child.setParent(null);
+              child.parent = null;
               this.children["delete"](child);
             }
           }
@@ -10548,10 +10576,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         this.orientation = options.orientation || new Quaternion();
         /**
-         * @property {Body} body
+         * @property {Body|Group} parent
          */
 
-        this.body = null;
+        this.parent = null;
       }
 
       Shape.prototype.constructor = Shape;
@@ -10596,6 +10624,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       Shape.prototype.calculateLocalInertia = function (mass, target) {
         throw 'calculateLocalInertia() not implemented for shape type ' + this.type;
+      };
+      /**
+       * Sets the parent of the shape.
+       * @param {Body|Group} parent
+       * @method setParent
+       */
+
+
+      Shape.prototype.setParent = function (parent) {
+        this.parent = parent;
       };
 
       Shape.idCounter = 0;

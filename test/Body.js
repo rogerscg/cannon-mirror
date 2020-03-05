@@ -1,3 +1,4 @@
+var AABB = require('../src/collision/AABB');
 var Body = require('../src/objects/Body');
 var Box = require('../src/shapes/Box');
 var Group = require('../src/shapes/Group');
@@ -182,5 +183,37 @@ module.exports = {
     test.ok(body.velocity.almostEquals(new Vec3(0, 0, f * dt))); // The force is rotated to world space
 
     test.done();
+  },
+
+  remove: {
+    addAndRemove: function(test) {
+      var bigSphere = new Sphere(2);
+      var littleSphere = new Sphere(1);
+      var bodyA = new Body({
+        mass: 1
+      });
+      bodyA.addShape(bigSphere);
+      bodyA.addShape(littleSphere);
+      bodyA.computeAABB();
+
+      const bigBox = new AABB({
+        upperBound: new Vec3(2, 2, 2),
+        lowerBound: new Vec3(-2, -2, -2)
+      });
+
+      test.deepEqual(bodyA.aabb, bigBox, 'Initial AABB does not match');
+
+      bodyA.remove(bigSphere);
+      bodyA.computeAABB();
+
+      const littleBox = new AABB({
+        upperBound: new Vec3(1, 1, 1),
+        lowerBound: new Vec3(-1, -1, -1)
+      });
+
+      test.deepEqual(bodyA.aabb, littleBox, 'Final AABB does not match');
+
+      test.done();
+    }
   }
 };

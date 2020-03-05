@@ -1,4 +1,4 @@
-// Fri, 28 Feb 2020 04:29:50 GMT
+// Thu, 05 Mar 2020 04:41:25 GMT
 
 /*
  * Copyright (c) 2015 cannon.js Authors
@@ -6095,18 +6095,21 @@ Body.prototype.addShape = function(shape, _offset, _orientation) {
   if (_orientation) {
     orientation.copy(_orientation);
   }
-
-  this.children.push(shape);
   shape.offset = offset;
   shape.orientation = orientation;
-  this.updateMassProperties();
-  this.updateBoundingRadius();
-
-  this.aabbNeedsUpdate = true;
-
-  shape.body = this;
+  this.add(shape);
 
   return this;
+};
+
+/**
+ * Re,pves a shape from the body.
+ * @method addShape
+ * @param {Shape} shape
+ * @return {Body} The body object, for chainability.
+ */
+Body.prototype.removeShape = function(shape) {
+  return this.remove(shape);
 };
 
 /**
@@ -6117,11 +6120,31 @@ Body.prototype.addShape = function(shape, _offset, _orientation) {
  */
 Body.prototype.add = function(child) {
   this.children.push(child);
+  child.setParent(this);
   this.updateMassProperties();
   this.updateBoundingRadius();
 
   this.aabbNeedsUpdate = true;
-  // @todo: Set parent of shape/group.
+  return this;
+};
+
+/**
+ * Removes a group or shape from the body.
+ * @method remove
+ * @param {Group|Shape} child
+ * @return {Body} The body object, for chainability.
+ */
+Body.prototype.remove = function(child) {
+  const index = this.children.indexOf(child);
+  if (index == -1) {
+    return this;
+  }
+  this.children.splice(index, 1);
+  child.parent = null;
+  this.updateMassProperties();
+  this.updateBoundingRadius();
+
+  this.aabbNeedsUpdate = true;
   return this;
 };
 
@@ -9412,8 +9435,7 @@ class Group {
    * @method add
    */
   add(child) {
-    // TODO: Set parent as well.
-    //child.setParent(this);
+    child.setParent(this);
     this.children.add(child);
   }
 
@@ -9424,7 +9446,7 @@ class Group {
    */
   remove(child) {
     if (this.children.has(child)) {
-      this.child.setParent(null);
+      child.parent = null;
       this.children.delete(child);
     }
   }
@@ -10381,9 +10403,9 @@ function Shape(options) {
   this.orientation = options.orientation || new Quaternion();
 
   /**
-   * @property {Body} body
+   * @property {Body|Group} parent
    */
-  this.body = null;
+  this.parent = null;
 }
 Shape.prototype.constructor = Shape;
 
@@ -10425,6 +10447,15 @@ Shape.prototype.volume = function() {
  */
 Shape.prototype.calculateLocalInertia = function(mass, target) {
   throw 'calculateLocalInertia() not implemented for shape type ' + this.type;
+};
+
+/**
+ * Sets the parent of the shape.
+ * @param {Body|Group} parent
+ * @method setParent
+ */
+Shape.prototype.setParent = function(parent) {
+  this.parent = parent;
 };
 
 Shape.idCounter = 0;

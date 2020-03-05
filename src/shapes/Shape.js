@@ -79,9 +79,9 @@ function Shape(options) {
   this.orientation = options.orientation || new Quaternion();
 
   /**
-   * @property {Body} body
+   * @property {Body|Group} parent
    */
-  this.body = null;
+  this.parent = null;
 }
 Shape.prototype.constructor = Shape;
 
@@ -123,6 +123,15 @@ Shape.prototype.volume = function() {
  */
 Shape.prototype.calculateLocalInertia = function(mass, target) {
   throw 'calculateLocalInertia() not implemented for shape type ' + this.type;
+};
+
+/**
+ * Sets the parent of the shape.
+ * @param {Body|Group} parent
+ * @method setParent
+ */
+Shape.prototype.setParent = function(parent) {
+  this.parent = parent;
 };
 
 Shape.idCounter = 0;

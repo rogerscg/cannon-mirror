@@ -99,8 +99,7 @@ class Group {
    * @method add
    */
   add(child) {
-    // TODO: Set parent as well.
-    //child.setParent(this);
+    child.setParent(this);
     this.children.add(child);
   }
 
@@ -111,7 +110,7 @@ class Group {
    */
   remove(child) {
     if (this.children.has(child)) {
-      this.child.setParent(null);
+      child.parent = null;
       this.children.delete(child);
     }
   }

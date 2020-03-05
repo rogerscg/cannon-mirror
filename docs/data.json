@@ -6920,7 +6920,26 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 623,
+            "line": 616,
+            "description": "Re,pves a shape from the body.",
+            "itemtype": "method",
+            "name": "addShape",
+            "params": [
+                {
+                    "name": "shape",
+                    "description": "",
+                    "type": "Shape"
+                }
+            ],
+            "return": {
+                "description": "The body object, for chainability.",
+                "type": "Body"
+            },
+            "class": "Body"
+        },
+        {
+            "file": "src\\objects\\Body.js",
+            "line": 626,
             "description": "Add a group or shape to the body.",
             "itemtype": "method",
             "name": "add",
@@ -6939,7 +6958,26 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 639,
+            "line": 642,
+            "description": "Removes a group or shape from the body.",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "Group|Shape"
+                }
+            ],
+            "return": {
+                "description": "The body object, for chainability.",
+                "type": "Body"
+            },
+            "class": "Body"
+        },
+        {
+            "file": "src\\objects\\Body.js",
+            "line": 662,
             "description": "Update the bounding radius of the body. Should be done if any of the children\nare changed.",
             "itemtype": "method",
             "name": "updateBoundingRadius",
@@ -6947,7 +6985,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 664,
+            "line": 687,
             "description": "Updates the .aabb",
             "itemtype": "method",
             "name": "computeAABB",
@@ -6958,7 +6996,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 711,
+            "line": 734,
             "description": "Update .inertiaWorld and .invInertiaWorld",
             "itemtype": "method",
             "name": "updateInertiaWorld",
@@ -6966,7 +7004,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 734,
+            "line": 757,
             "description": "Apply force to a world point. This could for example be a point on the Body surface. Applying force this way will add to Body.force and Body.torque.",
             "itemtype": "method",
             "name": "applyForce",
@@ -6986,7 +7024,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 759,
+            "line": 782,
             "description": "Apply force to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalForce",
@@ -7006,7 +7044,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 782,
+            "line": 805,
             "description": "Apply impulse to a world point. This could for example be a point on the Body surface. An impulse is a force added to a body during a short period of time (impulse = force * time). Impulses will be added to Body.velocity and Body.angularVelocity.",
             "itemtype": "method",
             "name": "applyImpulse",
@@ -7026,7 +7064,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 822,
+            "line": 845,
             "description": "Apply locally-defined impulse to a local point in the body.",
             "itemtype": "method",
             "name": "applyLocalImpulse",
@@ -7046,7 +7084,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 847,
+            "line": 870,
             "description": "Should be called whenever you change the body shape or mass.",
             "itemtype": "method",
             "name": "updateMassProperties",
@@ -7054,7 +7092,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 875,
+            "line": 898,
             "description": "Get world velocity of a point in the body.",
             "itemtype": "method",
             "name": "getVelocityAtWorldPoint",
@@ -7078,7 +7116,7 @@
         },
         {
             "file": "src\\objects\\Body.js",
-            "line": 895,
+            "line": 918,
             "description": "Move the body forward in time.",
             "params": [
                 {
@@ -8754,7 +8792,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 107,
+            "line": 106,
             "description": "Removes a child from the group.",
             "params": [
                 {
@@ -8769,7 +8807,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 119,
+            "line": 118,
             "description": "Computes the bounding sphere radius. The result is stored in the property\n.boundingSphereRadius.",
             "itemtype": "method",
             "name": "updateBoundingSphereRadius",
@@ -8777,7 +8815,7 @@
         },
         {
             "file": "src\\shapes\\Group.js",
-            "line": 143,
+            "line": 142,
             "description": "Computes the bounding box for the shape and stores the result in min and max.",
             "todo": [
                 "Calculate world position and world rotation within group/shape."
@@ -9207,8 +9245,8 @@
             "file": "src\\shapes\\Shape.js",
             "line": 81,
             "itemtype": "property",
-            "name": "body",
-            "type": "Body",
+            "name": "parent",
+            "type": "Body|Group",
             "class": "Shape"
         },
         {
@@ -9284,7 +9322,22 @@
         },
         {
             "file": "src\\shapes\\Shape.js",
-            "line": 130,
+            "line": 128,
+            "description": "Sets the parent of the shape.",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "",
+                    "type": "Body|Group"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setParent",
+            "class": "Shape"
+        },
+        {
+            "file": "src\\shapes\\Shape.js",
+            "line": 139,
             "description": "The available shape types.",
             "static": 1,
             "itemtype": "property",
@@ -11778,7 +11831,7 @@
         },
         {
             "message": "Missing item type\nMove the body forward in time.",
-            "line": " src\\objects\\Body.js:895"
+            "line": " src\\objects\\Body.js:918"
         },
         {
             "message": "Missing item type\nShim to better match Shape.",
@@ -11790,7 +11843,7 @@
         },
         {
             "message": "Missing item type\nComputes the bounding box for the shape and stores the result in min and max.",
-            "line": " src\\shapes\\Group.js:143"
+            "line": " src\\shapes\\Group.js:142"
         },
         {
             "message": "Missing item type\nGet an AABB of a square in the heightfield",

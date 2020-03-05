@@ -606,18 +606,21 @@ Body.prototype.addShape = function(shape, _offset, _orientation) {
   if (_orientation) {
     orientation.copy(_orientation);
   }
-
-  this.children.push(shape);
   shape.offset = offset;
   shape.orientation = orientation;
-  this.updateMassProperties();
-  this.updateBoundingRadius();
-
-  this.aabbNeedsUpdate = true;
-
-  shape.body = this;
+  this.add(shape);
 
   return this;
+};
+
+/**
+ * Re,pves a shape from the body.
+ * @method addShape
+ * @param {Shape} shape
+ * @return {Body} The body object, for chainability.
+ */
+Body.prototype.removeShape = function(shape) {
+  return this.remove(shape);
 };
 
 /**
@@ -628,11 +631,31 @@ Body.prototype.addShape = function(shape, _offset, _orientation) {
  */
 Body.prototype.add = function(child) {
   this.children.push(child);
+  child.setParent(this);
   this.updateMassProperties();
   this.updateBoundingRadius();
 
   this.aabbNeedsUpdate = true;
-  // @todo: Set parent of shape/group.
+  return this;
+};
+
+/**
+ * Removes a group or shape from the body.
+ * @method remove
+ * @param {Group|Shape} child
+ * @return {Body} The body object, for chainability.
+ */
+Body.prototype.remove = function(child) {
+  const index = this.children.indexOf(child);
+  if (index == -1) {
+    return this;
+  }
+  this.children.splice(index, 1);
+  child.parent = null;
+  this.updateMassProperties();
+  this.updateBoundingRadius();
+
+  this.aabbNeedsUpdate = true;
   return this;
 };
 
