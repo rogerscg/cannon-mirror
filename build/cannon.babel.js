@@ -12663,52 +12663,63 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
 
           var justTest = bi.type & Body.KINEMATIC && bj.type & Body.STATIC || bi.type & Body.STATIC && bj.type & Body.KINEMATIC || bi.type & Body.KINEMATIC && bj.type & Body.KINEMATIC;
+          var componentsI = bi.getAllComponents(); // @todo: This whole function is a mess. Try and untangle.
+          // Get all shapes for body i.
 
-          for (var i = 0; i < bi.children.length; i++) {
-            bi.quaternion.mult(bi.children[i].orientation, qi);
-            bi.quaternion.vmult(bi.children[i].offset, xi);
-            xi.vadd(bi.position, xi);
-            var si = bi.children[i];
+          for (var ciIndex = 0; ciIndex < componentsI.length; ciIndex++) {
+            var componentI = componentsI[ciIndex];
+            var shapesI = componentI.getShapes();
 
-            for (var j = 0; j < bj.children.length; j++) {
-              // Compute world transform of shapes
-              bj.quaternion.mult(bj.children[j].orientation, qj);
-              bj.quaternion.vmult(bj.children[j].offset, xj);
-              xj.vadd(bj.position, xj);
-              var sj = bj.children[j];
+            for (var siIndex = 0; siIndex < shapesI.length; siIndex++) {
+              var si = shapesI[siIndex]; // Compute world position and rotation of shape.
 
-              if (!(si.collisionFilterMask & sj.collisionFilterGroup && sj.collisionFilterMask & si.collisionFilterGroup)) {
-                continue;
-              }
+              componentI.getShapePositionAndRotation(si, qi, xi); // Get all shapes for body j.
 
-              if (xi.distanceTo(xj) > si.boundingSphereRadius + sj.boundingSphereRadius) {
-                continue;
-              } // Get collision material
+              var componentsJ = bj.getAllComponents();
+
+              for (var cjIndex = 0; cjIndex < componentsJ.length; cjIndex++) {
+                var componentJ = componentsJ[cjIndex];
+                var shapesJ = componentJ.getShapes();
+
+                for (var sjIndex = 0; sjIndex < shapesJ.length; sjIndex++) {
+                  var sj = shapesJ[sjIndex]; // Compute world position and rotation of shape.
+
+                  componentJ.getShapePositionAndRotation(sj, qj, xj);
+
+                  if (!(si.collisionFilterMask & sj.collisionFilterGroup && sj.collisionFilterMask & si.collisionFilterGroup)) {
+                    continue;
+                  }
+
+                  if (xi.distanceTo(xj) > si.boundingSphereRadius + sj.boundingSphereRadius) {
+                    continue;
+                  } // Get collision material
 
 
-              var shapeContactMaterial = null;
+                  var shapeContactMaterial = null;
 
-              if (si.material && sj.material) {
-                shapeContactMaterial = world.getContactMaterial(si.material, sj.material) || null;
-              }
+                  if (si.material && sj.material) {
+                    shapeContactMaterial = world.getContactMaterial(si.material, sj.material) || null;
+                  }
 
-              this.currentContactMaterial = shapeContactMaterial || bodyContactMaterial || world.defaultContactMaterial; // Get contacts
+                  this.currentContactMaterial = shapeContactMaterial || bodyContactMaterial || world.defaultContactMaterial; // Get contacts
 
-              var resolver = this[si.type | sj.type];
+                  var resolver = this[si.type | sj.type];
 
-              if (resolver) {
-                var retval = false;
+                  if (resolver) {
+                    var retval = false;
 
-                if (si.type < sj.type) {
-                  retval = resolver.call(this, si, sj, xi, xj, qi, qj, bi, bj, si, sj, justTest);
-                } else {
-                  retval = resolver.call(this, sj, si, xj, xi, qj, qi, bj, bi, si, sj, justTest);
-                }
+                    if (si.type < sj.type) {
+                      retval = resolver.call(this, si, sj, xi, xj, qi, qj, bi, bj, si, sj, justTest);
+                    } else {
+                      retval = resolver.call(this, sj, si, xj, xi, qj, qi, bj, bi, si, sj, justTest);
+                    }
 
-                if (retval && justTest) {
-                  // Register overlap
-                  world.shapeOverlapKeeper.set(si.id, sj.id);
-                  world.bodyOverlapKeeper.set(bi.id, bj.id);
+                    if (retval && justTest) {
+                      // Register overlap
+                      world.shapeOverlapKeeper.set(si.id, sj.id);
+                      world.bodyOverlapKeeper.set(bi.id, bj.id);
+                    }
+                  }
                 }
               }
             }

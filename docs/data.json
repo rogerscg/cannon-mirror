@@ -10597,7 +10597,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 477,
+            "line": 485,
             "itemtype": "method",
             "name": "sphereSphere",
             "params": [
@@ -10646,7 +10646,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 531,
+            "line": 539,
             "itemtype": "method",
             "name": "planeTrimesh",
             "params": [
@@ -10695,7 +10695,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 616,
+            "line": 624,
             "itemtype": "method",
             "name": "sphereTrimesh",
             "params": [
@@ -10744,7 +10744,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 854,
+            "line": 862,
             "itemtype": "method",
             "name": "spherePlane",
             "params": [
@@ -10793,7 +10793,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 977,
+            "line": 985,
             "itemtype": "method",
             "name": "sphereBox",
             "params": [
@@ -10842,7 +10842,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 1225,
+            "line": 1233,
             "itemtype": "method",
             "name": "sphereConvex",
             "params": [
@@ -10891,7 +10891,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 1475,
+            "line": 1483,
             "itemtype": "method",
             "name": "planeBox",
             "params": [
@@ -10945,7 +10945,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 1525,
+            "line": 1533,
             "itemtype": "method",
             "name": "planeConvex",
             "params": [
@@ -10994,7 +10994,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 1614,
+            "line": 1622,
             "itemtype": "method",
             "name": "convexConvex",
             "params": [
@@ -11043,7 +11043,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 1690,
+            "line": 1698,
             "itemtype": "method",
             "name": "convexTrimesh",
             "params": [
@@ -11097,7 +11097,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 1774,
+            "line": 1782,
             "itemtype": "method",
             "name": "particlePlane",
             "params": [
@@ -11151,7 +11151,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 1832,
+            "line": 1840,
             "itemtype": "method",
             "name": "particleSphere",
             "params": [
@@ -11205,7 +11205,7 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 1889,
+            "line": 1897,
             "itemtype": "method",
             "name": "convexParticle",
             "params": [
@@ -11259,14 +11259,14 @@
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 2032,
+            "line": 2040,
             "itemtype": "method",
             "name": "convexHeightfield",
             "class": "Narrowphase"
         },
         {
             "file": "src\\world\\Narrowphase.js",
-            "line": 2185,
+            "line": 2193,
             "itemtype": "method",
             "name": "sphereHeightfield",
             "class": "Narrowphase"

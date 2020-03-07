@@ -67,7 +67,6 @@ module.exports = {
     var result = new RaycastResult();
     r.intersectBodies([body1, body2], result);
     test.equals(result.hasHit, true);
-    console.log(result.hitPointWorld);
     test.ok(result.hitPointWorld.almostEquals(new Vec3(0.5, 0, 0)));
     test.done();
   },

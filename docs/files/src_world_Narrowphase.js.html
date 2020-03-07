@@ -413,87 +413,95 @@ Narrowphase.prototype.getContacts = function(
       (bi.type &amp; Body.STATIC &amp;&amp; bj.type &amp; Body.KINEMATIC) ||
       (bi.type &amp; Body.KINEMATIC &amp;&amp; bj.type &amp; Body.KINEMATIC);
 
-    for (var i = 0; i &lt; bi.children.length; i++) {
-      bi.quaternion.mult(bi.children[i].orientation, qi);
-      bi.quaternion.vmult(bi.children[i].offset, xi);
-      xi.vadd(bi.position, xi);
-      var si = bi.children[i];
+    const componentsI = bi.getAllComponents();
+    // @todo: This whole function is a mess. Try and untangle.
+    // Get all shapes for body i.
+    for (var ciIndex = 0; ciIndex &lt; componentsI.length; ciIndex++) {
+      const componentI = componentsI[ciIndex];
+      const shapesI = componentI.getShapes();
+      for (var siIndex = 0; siIndex &lt; shapesI.length; siIndex++) {
+        var si = shapesI[siIndex];
+        // Compute world position and rotation of shape.
+        componentI.getShapePositionAndRotation(si, qi, xi);
+        // Get all shapes for body j.
+        const componentsJ = bj.getAllComponents();
+        for (var cjIndex = 0; cjIndex &lt; componentsJ.length; cjIndex++) {
+          const componentJ = componentsJ[cjIndex];
+          const shapesJ = componentJ.getShapes();
+          for (var sjIndex = 0; sjIndex &lt; shapesJ.length; sjIndex++) {
+            const sj = shapesJ[sjIndex];
+            // Compute world position and rotation of shape.
+            componentJ.getShapePositionAndRotation(sj, qj, xj);
+            if (
+              !(
+                si.collisionFilterMask &amp; sj.collisionFilterGroup &amp;&amp;
+                sj.collisionFilterMask &amp; si.collisionFilterGroup
+              )
+            ) {
+              continue;
+            }
 
-      for (var j = 0; j &lt; bj.children.length; j++) {
-        // Compute world transform of shapes
-        bj.quaternion.mult(bj.children[j].orientation, qj);
-        bj.quaternion.vmult(bj.children[j].offset, xj);
-        xj.vadd(bj.position, xj);
-        var sj = bj.children[j];
+            if (
+              xi.distanceTo(xj) &gt;
+              si.boundingSphereRadius + sj.boundingSphereRadius
+            ) {
+              continue;
+            }
 
-        if (
-          !(
-            si.collisionFilterMask &amp; sj.collisionFilterGroup &amp;&amp;
-            sj.collisionFilterMask &amp; si.collisionFilterGroup
-          )
-        ) {
-          continue;
-        }
+            // Get collision material
+            var shapeContactMaterial = null;
+            if (si.material &amp;&amp; sj.material) {
+              shapeContactMaterial =
+                world.getContactMaterial(si.material, sj.material) || null;
+            }
 
-        if (
-          xi.distanceTo(xj) &gt;
-          si.boundingSphereRadius + sj.boundingSphereRadius
-        ) {
-          continue;
-        }
+            this.currentContactMaterial =
+              shapeContactMaterial ||
+              bodyContactMaterial ||
+              world.defaultContactMaterial;
 
-        // Get collision material
-        var shapeContactMaterial = null;
-        if (si.material &amp;&amp; sj.material) {
-          shapeContactMaterial =
-            world.getContactMaterial(si.material, sj.material) || null;
-        }
+            // Get contacts
+            var resolver = this[si.type | sj.type];
+            if (resolver) {
+              var retval = false;
+              if (si.type &lt; sj.type) {
+                retval = resolver.call(
+                  this,
+                  si,
+                  sj,
+                  xi,
+                  xj,
+                  qi,
+                  qj,
+                  bi,
+                  bj,
+                  si,
+                  sj,
+                  justTest
+                );
+              } else {
+                retval = resolver.call(
+                  this,
+                  sj,
+                  si,
+                  xj,
+                  xi,
+                  qj,
+                  qi,
+                  bj,
+                  bi,
+                  si,
+                  sj,
+                  justTest
+                );
+              }
 
-        this.currentContactMaterial =
-          shapeContactMaterial ||
-          bodyContactMaterial ||
-          world.defaultContactMaterial;
-
-        // Get contacts
-        var resolver = this[si.type | sj.type];
-        if (resolver) {
-          var retval = false;
-          if (si.type &lt; sj.type) {
-            retval = resolver.call(
-              this,
-              si,
-              sj,
-              xi,
-              xj,
-              qi,
-              qj,
-              bi,
-              bj,
-              si,
-              sj,
-              justTest
-            );
-          } else {
-            retval = resolver.call(
-              this,
-              sj,
-              si,
-              xj,
-              xi,
-              qj,
-              qi,
-              bj,
-              bi,
-              si,
-              sj,
-              justTest
-            );
-          }
-
-          if (retval &amp;&amp; justTest) {
-            // Register overlap
-            world.shapeOverlapKeeper.set(si.id, sj.id);
-            world.bodyOverlapKeeper.set(bi.id, bj.id);
+              if (retval &amp;&amp; justTest) {
+                // Register overlap
+                world.shapeOverlapKeeper.set(si.id, sj.id);
+                world.bodyOverlapKeeper.set(bi.id, bj.id);
+              }
+            }
           }
         }
       }
