@@ -1096,7 +1096,6 @@ CANNON.Demo.prototype.shape2mesh = function(body) {
     const shapes = component.getShapes();
     for (var j = 0; j < shapes.length; j++) {
       var mesh;
-      console.log('mesh');
       const shape = shapes[j];
       switch (shape.type) {
         case CANNON.Shape.types.SPHERE:

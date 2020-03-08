@@ -1,13 +1,14 @@
 module.exports = Body;
 
-var EventTarget = require('../utils/EventTarget');
-var Shape = require('../shapes/Shape');
-var Vec3 = require('../math/Vec3');
-var Mat3 = require('../math/Mat3');
-var Quaternion = require('../math/Quaternion');
-var Material = require('../material/Material');
 var AABB = require('../collision/AABB');
 var Box = require('../shapes/Box');
+var EventTarget = require('../utils/EventTarget');
+var Group = require('../shapes/Group');
+var Mat3 = require('../math/Mat3');
+var Material = require('../material/Material');
+var Quaternion = require('../math/Quaternion');
+var Shape = require('../shapes/Shape');
+var Vec3 = require('../math/Vec3');
 
 /**
  * Base class for all body types.
@@ -600,33 +601,20 @@ var tmpQuat = new Quaternion();
  * @param {Shape} shape
  * @param {Vec3} [_offset]
  * @param {Quaternion} [_orientation]
- * @return {Body} The body object, for chainability.
+ * @return {Group} The group created for the shape.
  */
 Body.prototype.addShape = function(shape, _offset, _orientation) {
-  var offset = new Vec3();
-  var orientation = new Quaternion();
+  const group = new Group();
+  group.add(shape);
 
   if (_offset) {
-    offset.copy(_offset);
+    group.position.copy(_offset);
   }
   if (_orientation) {
-    orientation.copy(_orientation);
+    group.quaternion.copy(_orientation);
   }
-  shape.offset = offset;
-  shape.orientation = orientation;
-  this.add(shape);
-
-  return this;
-};
-
-/**
- * Re,pves a shape from the body.
- * @method addShape
- * @param {Shape} shape
- * @return {Body} The body object, for chainability.
- */
-Body.prototype.removeShape = function(shape) {
-  return this.remove(shape);
+  this.add(group);
+  return group;
 };
 
 /**
@@ -994,8 +982,7 @@ Body.prototype.getAllComponents = function() {
   let components = [this];
   this.children.forEach((child) => {
     if (child.isComponent) {
-      components.push(child);
-      components = comments.concat(child.getAllComponents());
+      components = components.concat(child.getAllComponents());
     }
   });
   return components;

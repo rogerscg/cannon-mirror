@@ -218,7 +218,7 @@ class Group {
    * @return {Array}
    */
   getShapes() {
-    return this.children.filter((child) => child.isShape);
+    return [...this.children].filter((child) => child.isShape);
   }
 
   /**

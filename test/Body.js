@@ -192,8 +192,8 @@ module.exports = {
       var bodyA = new Body({
         mass: 1
       });
-      bodyA.addShape(bigSphere);
-      bodyA.addShape(littleSphere);
+      const bigComponent = bodyA.addShape(bigSphere);
+      const smallComponent = bodyA.addShape(littleSphere);
       bodyA.computeAABB();
 
       const bigBox = new AABB({
@@ -203,7 +203,7 @@ module.exports = {
 
       test.deepEqual(bodyA.aabb, bigBox, 'Initial AABB does not match');
 
-      bodyA.remove(bigSphere);
+      bodyA.remove(bigComponent);
       bodyA.computeAABB();
 
       const littleBox = new AABB({

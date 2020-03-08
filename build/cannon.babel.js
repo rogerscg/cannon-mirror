@@ -5704,21 +5704,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     32: [function (require, module, exports) {
       module.exports = Body;
 
+      var AABB = require('../collision/AABB');
+
+      var Box = require('../shapes/Box');
+
       var EventTarget = require('../utils/EventTarget');
+
+      var Group = require('../shapes/Group');
+
+      var Mat3 = require('../math/Mat3');
+
+      var Material = require('../material/Material');
+
+      var Quaternion = require('../math/Quaternion');
 
       var Shape = require('../shapes/Shape');
 
       var Vec3 = require('../math/Vec3');
-
-      var Mat3 = require('../math/Mat3');
-
-      var Quaternion = require('../math/Quaternion');
-
-      var Material = require('../material/Material');
-
-      var AABB = require('../collision/AABB');
-
-      var Box = require('../shapes/Box');
       /**
        * Base class for all body types.
        * @class Body
@@ -6302,36 +6304,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        * @param {Shape} shape
        * @param {Vec3} [_offset]
        * @param {Quaternion} [_orientation]
-       * @return {Body} The body object, for chainability.
+       * @return {Group} The group created for the shape.
        */
 
       Body.prototype.addShape = function (shape, _offset, _orientation) {
-        var offset = new Vec3();
-        var orientation = new Quaternion();
+        var group = new Group();
+        group.add(shape);
 
         if (_offset) {
-          offset.copy(_offset);
+          group.position.copy(_offset);
         }
 
         if (_orientation) {
-          orientation.copy(_orientation);
+          group.quaternion.copy(_orientation);
         }
 
-        shape.offset = offset;
-        shape.orientation = orientation;
-        this.add(shape);
-        return this;
-      };
-      /**
-       * Re,pves a shape from the body.
-       * @method addShape
-       * @param {Shape} shape
-       * @return {Body} The body object, for chainability.
-       */
-
-
-      Body.prototype.removeShape = function (shape) {
-        return this.remove(shape);
+        this.add(group);
+        return group;
       };
       /**
        * Add a group or shape to the body.
@@ -6675,8 +6664,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var components = [this];
         this.children.forEach(function (child) {
           if (child.isComponent) {
-            components.push(child);
-            components = comments.concat(child.getAllComponents());
+            components = components.concat(child.getAllComponents());
           }
         });
         return components;
@@ -6714,6 +6702,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       "../math/Quaternion": 29,
       "../math/Vec3": 31,
       "../shapes/Box": 38,
+      "../shapes/Group": 41,
       "../shapes/Shape": 45,
       "../utils/EventTarget": 51
     }],
@@ -9817,7 +9806,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, {
           key: "getShapes",
           value: function getShapes() {
-            return this.children.filter(function (child) {
+            return _toConsumableArray(this.children).filter(function (child) {
               return child.isShape;
             });
           }
@@ -11340,7 +11329,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var n = this.vertices.length / 3,
             verts = this.vertices;
         var minx,miny,minz,maxx,maxy,maxz;
-          var v = tempWorldVertex;
+         var v = tempWorldVertex;
         for(var i=0; i<n; i++){
             this.getVertex(i, v);
             quat.vmult(v, v);
@@ -11350,12 +11339,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             } else if(v.x > maxx || maxx===undefined){
                 maxx = v.x;
             }
-              if (v.y < miny || miny===undefined){
+             if (v.y < miny || miny===undefined){
                 miny = v.y;
             } else if(v.y > maxy || maxy===undefined){
                 maxy = v.y;
             }
-              if (v.z < minz || minz===undefined){
+             if (v.z < minz || minz===undefined){
                 minz = v.z;
             } else if(v.z > maxz || maxz===undefined){
                 maxz = v.z;

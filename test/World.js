@@ -65,8 +65,9 @@ module.exports = {
   raycastClosest: {
     single: function(test) {
       var world = new World();
+      var shape = new Sphere(1);
       var body = new Body({
-        shape: new Sphere(1)
+        shape: shape
       });
       world.addBody(body);
 
@@ -78,19 +79,21 @@ module.exports = {
 
       test.equal(result.hasHit, true);
       test.equal(result.body, body);
-      test.equal(result.shape, body.children[0]);
+      test.equal(result.shape, shape);
 
       test.done();
     },
 
     order: function(test) {
       var world = new World();
+      var shapeA = new Sphere(1);
       var bodyA = new Body({
-        shape: new Sphere(1),
+        shape: shapeA,
         position: new Vec3(-1, 0, 0)
       });
+      var shapeB = new Sphere(1);
       var bodyB = new Body({
-        shape: new Sphere(1),
+        shape: shapeB,
         position: new Vec3(1, 0, 0)
       });
       world.addBody(bodyA);
@@ -104,7 +107,7 @@ module.exports = {
 
       test.equal(result.hasHit, true);
       test.equal(result.body, bodyA);
-      test.equal(result.shape, bodyA.children[0]);
+      test.equal(result.shape, shapeA);
 
       from.set(10, 0, 0);
       to.set(-10, 0, 0);
@@ -114,7 +117,7 @@ module.exports = {
 
       test.equal(result.hasHit, true);
       test.equal(result.body, bodyB);
-      test.equal(result.shape, bodyB.children[0]);
+      test.equal(result.shape, shapeB);
 
       test.done();
     }
@@ -123,7 +126,8 @@ module.exports = {
   raycastAll: {
     simple: function(test) {
       var world = new World();
-      var body = new Body({ shape: new Sphere(1) });
+      var shape = new Sphere(1);
+      var body = new Body({ shape: shape });
       world.addBody(body);
 
       var from = new Vec3(-10, 0, 0);
@@ -145,7 +149,7 @@ module.exports = {
       test.equal(hasHit, true);
       test.equal(resultBody, body);
       test.equal(numResults, 2);
-      test.equal(resultShape, resultBody.children[0]);
+      test.equal(resultShape, shape);
 
       test.done();
     },

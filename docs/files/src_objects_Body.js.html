@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\objects\Body.js - cannon</title>
+    <title>src/objects/Body.js - cannon</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,20 +132,21 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src\objects\Body.js</h1>
+<h1 class="file-heading">File: src/objects/Body.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 module.exports = Body;
 
-var EventTarget = require(&#x27;../utils/EventTarget&#x27;);
-var Shape = require(&#x27;../shapes/Shape&#x27;);
-var Vec3 = require(&#x27;../math/Vec3&#x27;);
-var Mat3 = require(&#x27;../math/Mat3&#x27;);
-var Quaternion = require(&#x27;../math/Quaternion&#x27;);
-var Material = require(&#x27;../material/Material&#x27;);
 var AABB = require(&#x27;../collision/AABB&#x27;);
 var Box = require(&#x27;../shapes/Box&#x27;);
+var EventTarget = require(&#x27;../utils/EventTarget&#x27;);
+var Group = require(&#x27;../shapes/Group&#x27;);
+var Mat3 = require(&#x27;../math/Mat3&#x27;);
+var Material = require(&#x27;../material/Material&#x27;);
+var Quaternion = require(&#x27;../math/Quaternion&#x27;);
+var Shape = require(&#x27;../shapes/Shape&#x27;);
+var Vec3 = require(&#x27;../math/Vec3&#x27;);
 
 /**
  * Base class for all body types.
@@ -738,33 +739,20 @@ var tmpQuat = new Quaternion();
  * @param {Shape} shape
  * @param {Vec3} [_offset]
  * @param {Quaternion} [_orientation]
- * @return {Body} The body object, for chainability.
+ * @return {Group} The group created for the shape.
  */
 Body.prototype.addShape = function(shape, _offset, _orientation) {
-  var offset = new Vec3();
-  var orientation = new Quaternion();
+  const group = new Group();
+  group.add(shape);
 
   if (_offset) {
-    offset.copy(_offset);
+    group.position.copy(_offset);
   }
   if (_orientation) {
-    orientation.copy(_orientation);
+    group.quaternion.copy(_orientation);
   }
-  shape.offset = offset;
-  shape.orientation = orientation;
-  this.add(shape);
-
-  return this;
-};
-
-/**
- * Re,pves a shape from the body.
- * @method addShape
- * @param {Shape} shape
- * @return {Body} The body object, for chainability.
- */
-Body.prototype.removeShape = function(shape) {
-  return this.remove(shape);
+  this.add(group);
+  return group;
 };
 
 /**
@@ -1132,8 +1120,7 @@ Body.prototype.getAllComponents = function() {
   let components = [this];
   this.children.forEach((child) =&gt; {
     if (child.isComponent) {
-      components.push(child);
-      components = comments.concat(child.getAllComponents());
+      components = components.concat(child.getAllComponents());
     }
   });
   return components;
